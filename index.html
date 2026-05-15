@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XV Años - Elizabeth García</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --rosa-fuerte: #f06292;
+            --texto: #4e342e;
+            --oro: #d4af37;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            color: var(--texto);
+            overflow-x: hidden;
+            background-color: #fff;
+        }
+
+        /* --- FONDO DEL USUARIO --- */
+        .fondo-usuario {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background-image: url('FondoPro.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* --- CAPA DE EFECTOS (ESTRELLAS/LUCES) --- */
+        #capa-estrellas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .estrella {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: destello var(--d) infinite;
+        }
+
+        @keyframes destello {
+            0%, 100% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        /* --- PANTALLA INICIAL --- */
+        #pantalla-castillo {
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1524397057410-1e775ed476f3?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .vidrio-intro {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            padding: 40px 25px;
+            margin: 20px;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 20px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .vidrio-intro h2 { font-family: 'Cinzel Decorative'; font-size: 2rem; margin: 25px 0; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .castillo-zoom { transform: scale(4); opacity: 0; pointer-events: none; }
+
+        /* --- CONTENIDO --- */
+        section {
+            min-height: 100vh;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* --- ANIMACIONES --- */
+        .animar-foto { opacity: 0; transform: scale(0.8); transition: 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+        .animar-foto.active { opacity: 1; transform: scale(1); }
+
+        .animar-nombre { opacity: 0; transform: translateY(30px); transition: 1.2s ease-out 0.6s; }
+        .animar-nombre.active { opacity: 1; transform: translateY(0); }
+
+        .animar-pergamino { opacity: 0; transform: translateY(40px) scale(0.9); transition: 1.5s ease-out; }
+        .animar-pergamino.active { opacity: 1; transform: translateY(0) scale(1); }
+
+        .foto-quince {
+            width: 250px; height: 350px;
+            object-fit: cover;
+            border: 8px solid white;
+            border-radius: 125px 125px 10px 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .nombre-xl {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(4rem, 15vw, 5.5rem);
+            color: var(--rosa-fuerte);
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            margin-top: 10px;
+        }
+
+        .pergamino-img {
+            width: 100%;
+            max-width: 500px;
+            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.2));
+        }
+
+        /* --- CALENDARIO --- */
+        .cal-box {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px 0;
+            border: 1px solid var(--rosa-fuerte);
+        }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; font-size: 0.8rem; }
+        .cal-dia.especial { color: var(--rosa-fuerte); font-weight: bold; position: relative; border: 1px solid var(--oro); border-radius: 50%; }
+        .corona { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); color: var(--oro); font-size: 1rem; }
+
+        /* --- OTROS --- */
+        .reloj-grid { display: flex; justify-content: center; gap: 10px; }
+        .box-t { background: white; padding: 12px; border-radius: 10px; min-width: 70px; border-bottom: 3px solid var(--rosa-fuerte); }
+        .box-t span { font-weight: bold; font-size: 1.4rem; color: var(--rosa-fuerte); display: block; }
+
+        .scroller { display: flex; overflow-x: auto; gap: 15px; padding: 20px; width: 100vw; scrollbar-width: none; }
+        .scroller img { height: 320px; border-radius: 12px; border: 6px solid white; flex-shrink: 0; }
+
+        .btn {
+            padding: 16px 30px;
+            background: white;
+            border: 2px solid var(--rosa-fuerte);
+            border-radius: 50px;
+            color: var(--rosa-fuerte);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="fondo-usuario"></div>
+    <div id="capa-estrellas"></div>
+
+    <!-- PANTALLA 1 -->
+    <div id="pantalla-castillo">
+        <div class="vidrio-intro">
+            <p style="font-style: italic; font-size: 1.1rem; color: #fff;">"Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida."</p>
+            <h2>Elizabeth García</h2>
+            <button class="btn" onclick="abrir()" style="background: var(--rosa-fuerte); color: white; border: none; cursor:pointer;">ABRIR INVITACIÓN</button>
+            <p style="font-size: 0.65rem; margin-top: 25px; letter-spacing: 2px; opacity: 0.9; color: #fff;">POR FAVOR ACTIVA EL SONIDO</p>
+        </div>
+    </div>
+
+    <audio id="musica" src="musica.mp3" loop></audio>
+
+    <!-- INVITACIÓN -->
+    <main id="app" style="display:none">
+        
+        <!-- SECCIÓN 1: FOTO Y NOMBRE -->
+        <section>
+            <img src="Foto1.png" class="foto-quince animar-foto">
+            <h1 class="nombre-xl animar-nombre">Elizabeth</h1>
+            <p class="reveal" style="letter-spacing: 6px; font-weight: 300;">MIS XV AÑOS</p>
+        </section>
+
+        <!-- SECCIÓN 2: PERGAMINO -->
+        <section>
+            <div class="animar-pergamino" style="width: 100%; display: flex; justify-content: center;">
+                <img src="pergamino.png" class="pergamino-img">
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: CALENDARIO -->
+        <section>
+            <div class="reveal">
+                <p style="margin-bottom: 15px; letter-spacing: 3px; font-weight: 600;">MAYO 2026</p>
+                <div class="cal-box">
+                    <div class="cal-grid" style="font-weight: bold; color: #999; margin-bottom: 10px;">
+                        <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
+                    </div>
+                    <div class="cal-grid">
+                        <span></span><span></span><span></span><span></span><span></span><span>1</span><span>2</span>
+                        <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                        <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
+                        <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+                        <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span>
+                        <span class="cal-dia especial"><i class="fas fa-crown corona"></i>30</span>
+                        <span>31</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: CONTADOR -->
+        <section>
+            <p style="margin-bottom: 25px; font-size: 0.9rem;">"La cuenta regresiva ha comenzado"</p>
+            <div class="reloj-grid reveal">
+                <div class="box-t"><span id="d">00</span><small>Días</small></div>
+                <div class="box-t"><span id="h">00</span><small>Hrs</small></div>
+                <div class="box-t"><span id="m">00</span><small>Min</small></div>
+                <div class="box-t"><span id="s">00</span><small>Seg</small></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: GALERÍA -->
+        <section>
+            <h2 style="font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--rosa-fuerte); margin-bottom: 20px;">Galería</h2>
+            <div class="scroller">
+                <img src="Galfoto1.png"><img src="Galfoto2.png"><img src="Galfoto3.png"><img src="Galfoto4.png"><img src="Galfoto5.png">
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6: UBICACIONES -->
+        <section>
+            <div class="reveal" style="background: white; padding: 30px; border-radius: 15px; width: 90%; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+                <h3 style="font-family: 'Cinzel Decorative'; color: var(--rosa-fuerte);">Ceremonia</h3>
+                <p style="margin: 10px 0;">3:30 PM | Templo Jordán</p>
+                <a href="#" class="btn">📍 Ver Ubicación</a>
+            </div>
+            <div class="reveal" style="background: white; padding: 30px; border-radius: 15px; width: 90%; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+                <h3 style="font-family: 'Cinzel Decorative'; color: var(--rosa-fuerte);">Recepción</h3>
+                <p style="margin: 10px 0;">6:00 PM | Poliforum</p>
+                <a href="#" class="btn">📍 Cómo Llegar</a>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 7: RSVP -->
+        <section>
+            <div class="reveal" style="background: rgba(255,255,255,0.7); padding: 35px 25px; border-radius: 20px; width: 90%;">
+                <h3 style="font-family: 'Cinzel Decorative'; margin-bottom: 20px;">Confirmar Asistencia</h3>
+                <input type="text" placeholder="ESCRIBE TU NOMBRE" style="width:100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px; text-align: center; font-family: inherit;">
+                <!-- Número de WhatsApp de muestra -->
+                <a href="https://wa.me/0000000000?text=Hola,%20confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Elizabeth" class="btn" style="background: #25d366; color: white; border: none; width: 100%;">WhatsApp</a>
+                <p style="margin-top: 25px; font-style: italic; opacity: 0.8; font-size: 0.9rem;">"Porque para Dios nada es imposible" - Lucas 1:37</p>
+            </div>
+            
+            <img src="fotofinal.png" class="reveal" style="width: 260px; border-radius: 15px; margin-top: 50px; border: 8px solid white; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+        </section>
+
+    </main>
+
+    <script>
+        // Función para entrar a la invitación
+        function abrir() {
+            const castillo = document.getElementById('pantalla-castillo');
+            const musica = document.getElementById('musica');
+            const app = document.getElementById('app');
+
+            castillo.classList.add('castillo-zoom');
+            musica.play();
+
+            setTimeout(() => {
+                castillo.style.display = 'none';
+                app.style.display = 'block';
+                window.scrollTo(0,0);
+                crearEstrellas();
+                reveal();
+            }, 1200);
+        }
+
+        // Generador de estrellas sobre tu fondo
+        function crearEstrellas() {
+            const contenedor = document.getElementById('capa-estrellas');
+            for (let i = 0; i < 40; i++) {
+                const estrella = document.createElement('div');
+                estrella.className = 'estrella';
+                const size = Math.random() * 4 + 2 + 'px';
+                estrella.style.width = estrella.style.height = size;
+                estrella.style.left = Math.random() * 100 + 'vw';
+                estrella.style.top = Math.random() * 100 + 'vh';
+                estrella.style.setProperty('--d', Math.random() * 3 + 2 + 's');
+                contenedor.appendChild(estrella);
+            }
+        }
+
+        // Contador regresivo
+        const fechaFinal = new Date('May 30, 2026 15:30:00').getTime();
+        setInterval(() => {
+            const ahora = new Date().getTime();
+            const diff = fechaFinal - ahora;
+            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
+
+        // Lógica de aparición (scroll reveal)
+        function reveal() {
+            const items = document.querySelectorAll('.reveal, .animar-foto, .animar-nombre, .animar-pergamino');
+            items.forEach(i => {
+                if (i.getBoundingClientRect().top < window.innerHeight - 50) {
+                    i.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', reveal);
+    </script>
+</body>
+</html>
