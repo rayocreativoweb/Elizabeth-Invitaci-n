@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>XV Elizabeth García</title>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --rosa-pastel: #fce4ec;
             --rosa-fuerte: #d81b60;
             --texto: #2d1a17;
+            --plata-borde: #b0bec5;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,7 +28,7 @@
         }
 
         section {
-            padding: 40px 15px;
+            padding: 50px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -34,9 +36,81 @@
             width: 100%;
         }
 
-        /* 1. SECCIÓN FRASE INICIAL CON TU FONDO PERSONALIZADO */
+        /* --- AVISO DE SONIDO E ICONO FIJO --- */
+        .aviso-sonido-superior {
+            background-color: var(--rosa-fuerte);
+            color: white;
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        .control-musica-fijo {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border: 2px solid var(--rosa-fuerte);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .control-musica-fijo i {
+            color: var(--rosa-fuerte);
+            font-size: 1.3rem;
+        }
+
+        .pulsar-icono {
+            animation: pulsoIcono 2s infinite;
+        }
+        @keyframes pulsoIcono {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); box-shadow: 0 4px 20px rgba(216, 27, 96, 0.4); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- LINEA DE SEPARACIÓN PLATEADA CON DESTELLO --- */
+        .separador-plata {
+            position: relative;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #9e9e9e, #e0e0e0, #9e9e9e);
+            overflow: hidden;
+            border-top: 1px solid rgba(255,255,255,0.4);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .separador-plata::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.85), transparent);
+            animation: destelloMovimiento 3.5s infinite linear;
+        }
+
+        @keyframes destelloMovimiento {
+            0% { left: -150%; }
+            50% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* 1. SECCIÓN FRASE INICIAL */
         .seccion-intro {
-            background-image: url('FondoText.jpg');
+            background-image: url('FondoText.png');
             background-size: cover;
             background-position: center;
             width: 100%;
@@ -45,7 +119,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
         }
 
         .frase-intro {
@@ -54,7 +127,6 @@
             line-height: 1.5;
             color: var(--texto);
             max-width: 600px;
-            /* Animación de escritura */
             clip-path: inset(0 100% 0 0);
             animation: efectoEscritura 4.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
@@ -81,7 +153,7 @@
             transition: opacity 1s ease-in-out;
             border: 6px solid white;
             border-radius: 120px 120px 0 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             object-fit: cover;
         }
 
@@ -106,7 +178,7 @@
         }
         .pergamino-img.visible { opacity: 1; transform: translateY(0); }
 
-        /* 4. CALENDARIO CON CORAZÓN CENTRADO */
+        /* 4. CALENDARIO */
         .seccion-calendario {
             background-color: var(--rosa-fuerte);
             background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
@@ -156,15 +228,14 @@
             100% { stroke-dashoffset: -200; opacity: 0; }
         }
 
-        /* 5. FRASE BÍBLICA CON TU FONDO PERSONALIZADO */
+        /* 5. FRASE BÍBLICA */
         .seccion-frase-biblica {
-            background-image: url('FondoText.jpg');
+            background-image: url('FondoText.png');
             background-size: cover;
             background-position: center;
             width: 100%;
             padding: 80px 20px;
             text-align: center;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
         }
 
         .frase-quince {
@@ -178,14 +249,13 @@
         .cita-biblica {
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            /* 900pt de tracking adaptado a web (0.9em) */
             letter-spacing: 0.9em; 
             font-size: 0.75rem;
             font-weight: 600;
             color: var(--texto);
             display: block;
             margin-top: 30px;
-            padding-left: 0.9em; /* Para centrar compensando el espacio final */
+            padding-left: 0.9em;
         }
 
         /* 6. CONTADOR */
@@ -221,16 +291,166 @@
             flex-shrink: 0;
         }
 
+        /* --- 8. CEREMONIA Y RECEPCIÓN --- */
+        .icono-animado {
+            font-size: 3rem;
+            color: var(--rosa-fuerte);
+            margin-bottom: 15px;
+            animation: flotarEfecto 3s ease-in-out infinite;
+        }
+
+        @keyframes flotarEfecto {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .titulo-gala {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(1.4rem, 6vw, 2rem);
+            color: var(--rosa-fuerte);
+            margin-bottom: 15px;
+        }
+
+        .datos-gala {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            max-width: 320px;
+        }
+
+        .btn-rosa-plata {
+            padding: 14px 30px;
+            background-color: var(--rosa-fuerte);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 3px solid var(--plata-borde);
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+            transition: 0.3s;
+        }
+        .btn-rosa-plata:active { transform: scale(0.95); }
+
+        /* --- 9. FORMULARIO RSVP --- */
+        .seccion-rsvp {
+            background-color: #fff1f3;
+            background-image: url('https://www.transparenttextures.com/patterns/lined-paper.png'); /* Textura de líneas finas limpias */
+            width: 100%;
+            padding: 70px 20px;
+        }
+
+        .titulo-rsvp {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--rosa-fuerte);
+            margin-bottom: 10px;
+        }
+
+        .tarjeta-formulario {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 360px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(216, 27, 96, 0.1);
+            margin-top: 25px;
+        }
+
+        .control-form {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            text-align: center;
+            outline: none;
+        }
+        .control-form:focus { border-color: var(--rosa-fuerte); }
+
+        .btn-whatsapp-rsvp {
+            width: 100%;
+            padding: 15px;
+            background-color: #25d366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.25);
+        }
+
+        /* --- 10. CIERRE Y DESPEDIDA --- */
+        .frase-despedida {
+            font-family: 'Alex Brush', cursive;
+            font-size: 2.5rem;
+            color: var(--rosa-fuerte);
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        /* --- 11. FOTO FINAL PANTALLA COMPLETA --- */
+        .contenedor-foto-final {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--rosa-pastel);
+        }
+
+        .contenedor-foto-final img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .degradado-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, 
+                var(--rosa-pastel) 0%, 
+                transparent 15%, 
+                transparent 85%, 
+                var(--rosa-pastel) 100%);
+            pointer-events: none;
+        }
+
     </style>
 </head>
 <body>
 
+    <!-- ELEMENTOS DE AUDIO AUDIO -->
+    <div class="aviso-sonido-superior">Por favor activa el sonido</div>
+    
+    <div class="control-musica-fijo pulsar-icono" onclick="controlarMusica()">
+        <i id="icono-nota" class="fas fa-music"></i>
+    </div>
+    
+    <audio id="background-track" src="musica.mp3" loop></audio>
+
+    <!-- 1. FRASE INICIAL -->
     <div class="seccion-intro">
         <p class="frase-intro">
             Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida.
         </p>
     </div>
 
+    <div class="separador-plata"></div>
+
+    <!-- 2. SLIDESHOW -->
     <section>
         <div class="contenedor-fotos">
             <img src="Galfoto1.png" class="slide active">
@@ -242,10 +462,16 @@
         <h1 class="nombre-quince">Elizabeth García</h1>
     </section>
 
+    <div class="separador-plata"></div>
+
+    <!-- 3. PERGAMINO -->
     <section>
         <img src="pergamino.png" class="pergamino-img" id="pergamino">
     </section>
 
+    <div class="separador-plata"></div>
+
+    <!-- 4. CALENDARIO -->
     <div class="seccion-calendario">
         <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 25px; letter-spacing: 4px; text-align: center;">Guarda la fecha</h2>
         <div class="calendario">
@@ -263,6 +489,9 @@
         </div>
     </div>
 
+    <div class="separador-plata"></div>
+
+    <!-- 5. FRASE BÍBLICA -->
     <div class="seccion-frase-biblica">
         <p class="frase-quince">
             "Pongo mi vida en manos del Señor, confío en Él y Él actuará."
@@ -270,6 +499,9 @@
         </p>
     </div>
 
+    <div class="separador-plata"></div>
+
+    <!-- 6. CONTADOR -->
     <section>
         <div class="contenedor-blanco-contador">
             <div class="grid-contador">
@@ -281,6 +513,9 @@
         </div>
     </section>
 
+    <div class="separador-plata"></div>
+
+    <!-- 7. GALERIA -->
     <section>
         <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 15px; font-size: 1.3rem;">Mis Recuerdos</h2>
         <div class="galeria-scroller">
@@ -292,7 +527,86 @@
         </div>
     </section>
 
+    <div class="separador-plata"></div>
+
+    <!-- 8. DATOS DE CELEBRACIÓN -->
+    <section>
+        <div class="icono-animado"><i class="fas fa-church"></i></div>
+        <h2 class="titulo-gala">Ceremonia de Acción de Gracias</h2>
+        <p class="datos-gala">
+            <strong>Sábado 30 de Mayo de 2026</strong><br>
+            3:30 PM<br>
+            Templo Jordán (Escárcega, Camp.)<br>
+            <span style="font-style: italic; opacity: 0.8;">Oficiará el Pastor Isidro Luna</span>
+        </p>
+        <a href="#" class="btn-rosa-plata">Ver mapa</a>
+    </section>
+
+    <div class="separador-plata"></div>
+
+    <section>
+        <div class="icono-animado" style="animation-delay: 0.5s;"><i class="fas fa-glass-cheers"></i></div>
+        <h2 class="titulo-gala">Recepción Social</h2>
+        <p class="datos-gala">
+            <strong>Poliforum</strong><br>
+            Escárcega, Camp.<br>
+            Hora: 6:00 PM
+        </p>
+        <a href="#" class="btn-rosa-plata">Ver mapa</a>
+    </section>
+
+    <div class="separador-plata"></div>
+
+    <!-- 9. FORMULARIO RSVP -->
+    <div class="seccion-rsvp">
+        <h2 class="titulo-rsvp">¡Acompáñame!</h2>
+        <p style="font-size: 0.95rem; max-width: 320px; margin: 0 auto;">Tu presencia es muy importante, por favor confirma en el siguiente formulario</p>
+        
+        <center>
+            <div class="tarjeta-formulario">
+                <input type="text" class="control-form" placeholder="Nombre completo">
+                <select class="control-form">
+                    <option value="">¿Asistirás?</option>
+                    <option value="si">Sí, con gusto iré</option>
+                    <option value="no">Lo siento, no podré</option>
+                </select>
+                <button class="btn-whatsapp-rsvp"><i class="fab fa-whatsapp"></i> Confirmar Asistencia</button>
+            </div>
+        </center>
+    </div>
+
+    <div class="separador-plata"></div>
+
+    <!-- 10. CIERRE Y DESPEDIDA -->
+    <section style="background-color: white;">
+        <p class="frase-despedida">"Grandes cosas ha hecho el Señor con nosotros; y estamos alegres."</p>
+        <span style="font-family: 'Montserrat'; font-weight: 600; letter-spacing: 4px; color: var(--rosa-fuerte); text-transform: uppercase;">¡Te esperamos!</span>
+    </section>
+
+    <!-- 11. FOTO FINAL DEGRADADO COMPLETO -->
+    <div class="contenedor-foto-final">
+        <img src="FotoFinal.png">
+        <div class="degradado-overlay"></div>
+    </div>
+
     <script>
+        // Lógica de Audio
+        const track = document.getElementById('background-track');
+        const iconoNota = document.getElementById('icono-nota');
+        let sonando = false;
+
+        function controlarMusica() {
+            if(!sonando) {
+                track.play();
+                iconoNota.className = "fas fa-volume-up";
+                sonando = true;
+            } else {
+                track.pause();
+                iconoNota.className = "fas fa-music";
+                sonando = false;
+            }
+        }
+
         // Slideshow automático
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
@@ -302,7 +616,7 @@
             slides[currentSlide].classList.add('active');
         }, 4000);
 
-        // Scroll Reveal
+        // Scroll Reveal Pergamino
         const pergamino = document.getElementById('pergamino');
         window.addEventListener('scroll', () => {
             const pos = pergamino.getBoundingClientRect().top;
@@ -311,7 +625,7 @@
             }
         });
 
-        // Contador
+        // Reloj
         const fecha = new Date('May 30, 2026 15:30:00').getTime();
         setInterval(() => {
             const ahora = new Date().getTime();
