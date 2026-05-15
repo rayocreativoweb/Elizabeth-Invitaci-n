@@ -9,9 +9,9 @@
     <style>
         :root { 
             --rosa-pastel: #fce4ec; 
-            --rosa-bajito: #f8bbd0;
+            --crema-sobre: #fff5e1;
             --rosa-fuerte: #f06292; 
-            --plata: #c0c0c0;
+            --oro: #d4af37;
             --texto: #4e342e; 
         }
 
@@ -21,7 +21,6 @@
             font-family: 'Montserrat', sans-serif; 
             color: var(--texto); 
             overflow-x: hidden; 
-            /* Configuración de tu FondoPro.png */
             background-image: url('FondoPro.png');
             background-size: 100% auto;
             background-attachment: scroll;
@@ -29,54 +28,94 @@
             background-color: var(--rosa-pastel);
         }
 
-        /* --- PANTALLA INICIAL --- */
+        /* --- PANTALLA INICIAL: SOBRE ANIMADO --- */
         #pantalla-inicial {
             position: fixed;
             inset: 0;
             z-index: 5000;
             background-color: var(--rosa-pastel);
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
-            padding: 50px 20px;
-            transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1), opacity 1s;
+            padding: 40px 20px;
+            transition: opacity 1s ease-in-out;
         }
 
         .texto-intro {
             font-style: italic;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             text-align: center;
             max-width: 320px;
             line-height: 1.6;
-            color: var(--texto);
+            z-index: 10;
         }
 
-        /* DISEÑO DEL SOBRE REAL CON SVG */
-        .sobre-wrapper {
+        /* Estructura del Sobre Animado */
+        .wrapper-sobre {
             position: relative;
             width: 300px;
             height: 200px;
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
+            perspective: 1000px;
         }
 
-        .sobre-svg {
+        .sobre-cuerpo {
+            position: absolute;
+            bottom: 0;
             width: 100%;
             height: 100%;
+            background-color: var(--crema-sobre);
+            border: 1px solid #e6d5b8;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 2;
         }
 
-        .boton-redondo {
+        /* Solapa Superior */
+        .sobre-solapa {
             position: absolute;
-            right: -20px;
-            bottom: 10px;
-            width: 95px;
-            height: 95px;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--crema-sobre);
+            border: 1px solid #e6d5b8;
+            clip-path: polygon(0 0, 50% 55%, 100% 0);
+            z-index: 5;
+            transform-origin: top;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        /* Foto Polaroid que sale del sobre */
+        .polaroid-inicial {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            background: white;
+            padding: 8px 8px 25px 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 3;
+            opacity: 0;
+            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+        }
+
+        .polaroid-inicial img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        /* Botón Redondo */
+        .btn-abrir {
+            position: absolute;
+            right: -25px;
+            bottom: 20px;
+            width: 90px;
+            height: 90px;
             background: var(--rosa-fuerte);
             color: white;
             border: 4px solid white;
             border-radius: 50%;
-            font-family: 'Montserrat';
             font-weight: 700;
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -86,63 +125,49 @@
             text-align: center;
             cursor: pointer;
             z-index: 100;
-            box-shadow: 0 10px 20px rgba(240, 98, 146, 0.4);
-            animation: flotarBoton 3s ease-in-out infinite;
+            box-shadow: 0 8px 20px rgba(240, 98, 146, 0.3);
+            transition: 0.3s;
         }
 
-        @keyframes flotarBoton {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        /* Animación al abrir */
+        .abierto .sobre-solapa { transform: rotateX(180deg); z-index: 1; }
+        .abierto .polaroid-inicial { transform: translate(-50%, -100%) rotate(-5deg); opacity: 1; }
 
         .nombre-inicio {
             font-family: 'Cinzel Decorative';
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             color: var(--rosa-fuerte);
-            text-align: center;
             letter-spacing: 2px;
+            text-align: center;
         }
 
-        .aviso-sonido {
-            font-size: 0.7rem;
-            letter-spacing: 3px;
-            opacity: 0.6;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        /* --- CONTENIDO DE LA INVITACIÓN --- */
+        /* --- CONTENIDO INVITACIÓN --- */
         #video-fondo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; display: none; }
         #capa-estrellas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        
         .estrella { position: absolute; background: white; border-radius: 50%; opacity: 0; animation: destello var(--d) infinite; }
         @keyframes destello { 0%, 100% { opacity: 0; transform: scale(0.3); } 50% { opacity: 0.7; transform: scale(1.1); } }
 
-        section { padding: 60px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        section { padding: 50px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .reveal { opacity: 0; transform: translateY(25px); transition: 0.8s ease-out; }
         .reveal-zoom { opacity: 0; transform: scale(0.9); transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .active { opacity: 1 !important; transform: translate(0) scale(1) !important; }
 
-        .foto-quince { width: 250px; height: 350px; object-fit: cover; border: 8px solid white; border-radius: 130px 130px 10px 10px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
-        .nombre-xl { font-family: 'Great Vibes', cursive; font-size: clamp(4rem, 15vw, 5.5rem); color: var(--rosa-fuerte); text-shadow: 2px 2px 5px #fff; }
-        
-        .pergamino-img { width: 100%; max-width: 500px; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); }
+        .foto-quince { width: 250px; height: 350px; object-fit: cover; border: 8px solid white; border-radius: 125px 125px 10px 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .nombre-xl { font-family: 'Great Vibes', cursive; font-size: clamp(3.5rem, 15vw, 5rem); color: var(--rosa-fuerte); }
+        .pergamino-img { width: 100%; max-width: 480px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
 
-        .cal-box { background: rgba(255, 255, 255, 0.85); padding: 20px; border-radius: 15px; width: 100%; max-width: 300px; border: 1px solid var(--rosa-fuerte); backdrop-filter: blur(8px); }
-        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+        .cal-box { background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 15px; width: 100%; max-width: 300px; border: 1px solid var(--rosa-fuerte); backdrop-filter: blur(5px); }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; font-size: 0.8rem; }
         .cal-dia.especial { color: var(--rosa-fuerte); font-weight: bold; position: relative; }
-        .corona { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); color: var(--rosa-fuerte); font-size: 1.2rem; }
+        .corona { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); color: var(--rosa-fuerte); font-size: 1.1rem; }
 
-        .box-t { background: white; padding: 12px; border-radius: 12px; min-width: 75px; border-bottom: 4px solid var(--rosa-fuerte); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .box-t { background: white; padding: 12px; border-radius: 12px; min-width: 72px; border-bottom: 4px solid var(--rosa-fuerte); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .box-t span { font-weight: bold; font-size: 1.5rem; color: var(--rosa-fuerte); display: block; }
 
         .scroller { display: flex; overflow-x: auto; gap: 15px; padding: 20px; width: 100vw; scrollbar-width: none; }
-        .scroller img { height: 320px; border-radius: 12px; border: 6px solid white; flex-shrink: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .scroller img { height: 320px; border-radius: 15px; border: 6px solid white; flex-shrink: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        .btn-ws { padding: 18px 30px; background: #25d366; border-radius: 50px; color: white; font-weight: 700; text-decoration: none; display: inline-block; width: 100%; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
-        .btn-mapa { background: white; color: var(--rosa-fuerte); border: 2px solid var(--rosa-fuerte); padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 10px; display: inline-block; }
-
+        .btn-ws { padding: 16px 30px; background: #25d366; border-radius: 50px; color: white; font-weight: 700; text-decoration: none; display: inline-block; width: 100%; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
     </style>
 </head>
 <body>
@@ -150,42 +175,34 @@
     <video id="video-fondo" loop muted playsinline><source src="FondoVideo.mp4" type="video/mp4"></video>
     <div id="capa-estrellas"></div>
 
-    <!-- PANTALLA INICIAL: SOBRE FÍSICO CON TEXTOS -->
+    <!-- PANTALLA INICIAL -->
     <div id="pantalla-inicial">
-        
         <p class="texto-intro">"Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida."</p>
-
-        <div class="sobre-wrapper">
-            <!-- Dibujo del Sobre en SVG para que sea vea real -->
-            <svg class="sobre-svg" viewBox="0 0 300 200" preserveAspectRatio="none">
-                <!-- Cuerpo del sobre -->
-                <rect x="0" y="0" width="300" height="200" fill="#ffffff" stroke="#e0e0e0" stroke-width="2"/>
-                <!-- Dobleces inferiores -->
-                <path d="M0 200 L150 100 L300 200" fill="#f9f9f9" stroke="#eeeeee" stroke-width="1"/>
-                <!-- Dobleces laterales -->
-                <path d="M0 0 L150 100 L0 200" fill="#fcfcfc" stroke="#eeeeee" stroke-width="1"/>
-                <path d="M300 0 L150 100 L300 200" fill="#fcfcfc" stroke="#eeeeee" stroke-width="1"/>
-                <!-- Solapa superior (Cerrada) -->
-                <path d="M0 0 L150 110 L300 0" fill="#ffffff" stroke="#dddddd" stroke-width="1.5"/>
-            </svg>
-            
-            <div class="boton-redondo" onclick="abrirInvitacion()">Más<br>detalles</div>
+        
+        <div class="wrapper-sobre" id="sobre-contenedor">
+            <div class="sobre-solapa"></div>
+            <div class="sobre-cuerpo"></div>
+            <!-- Foto Polaroid que sale del sobre -->
+            <div class="polaroid-inicial">
+                <img src="Foto1.png" alt="Elizabeth">
+            </div>
+            <div class="btn-abrir" onclick="animarYEntrar()">Más<br>detalles</div>
         </div>
 
         <h2 class="nombre-inicio">Elizabeth García Huchin</h2>
 
-        <p class="aviso-sonido">Por favor activa el sonido</p>
+        <p style="font-size: 0.65rem; letter-spacing: 3px; opacity: 0.6; text-transform: uppercase;">Por favor activa el sonido</p>
     </div>
 
     <audio id="track" src="musica.mp3" loop></audio>
 
-    <!-- CONTENIDO REAL -->
+    <!-- INVITACIÓN -->
     <main id="app" style="display:none">
         
         <section>
             <img src="Foto1.png" class="foto-quince reveal-zoom">
             <h1 class="nombre-xl reveal">Elizabeth</h1>
-            <p class="reveal" style="letter-spacing: 8px; font-weight: 300;">MIS XV AÑOS</p>
+            <p class="reveal" style="letter-spacing: 6px; font-weight: 300;">MIS XV AÑOS</p>
         </section>
 
         <section>
@@ -196,7 +213,7 @@
 
         <section>
             <div class="reveal">
-                <p style="margin-bottom: 15px; letter-spacing: 4px; font-weight: 600;">MAYO 2026</p>
+                <p style="margin-bottom: 10px; letter-spacing: 3px; font-weight: 600;">MAYO 2026</p>
                 <div class="cal-box">
                     <div class="cal-grid" style="font-weight: bold; color: #999; margin-bottom: 10px;">
                         <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
@@ -221,7 +238,7 @@
                 <div class="box-t"><span id="m">00</span><small>Min</small></div>
                 <div class="box-t"><span id="s">00</span><small>Seg</small></div>
             </div>
-            <p class="reveal" style="margin-top: 20px;">"La cuenta regresiva ha comenzado"</p>
+            <p class="reveal" style="margin-top: 15px; font-size: 0.9rem;">"La cuenta regresiva ha comenzado"</p>
         </section>
 
         <section>
@@ -232,56 +249,61 @@
         </section>
 
         <section>
-            <div class="reveal" style="background: rgba(255,255,255,0.95); padding: 35px 25px; border-radius: 20px; width: 90%; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div class="reveal" style="background: rgba(255,255,255,0.9); padding: 30px; border-radius: 15px; width: 90%; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
                 <h3 style="font-family: 'Cinzel Decorative'; color: var(--rosa-fuerte);">Ceremonia de Acción de Gracias</h3>
                 <p style="margin: 10px 0;">3:30 PM | Templo Jordán</p>
-                <a href="#" class="btn-mapa">📍 Ver Ubicación</a>
+                <a href="#" style="background: white; color: var(--rosa-fuerte); border: 1px solid var(--rosa-fuerte); font-size: 0.75rem; padding: 10px 20px; border-radius: 50px; text-decoration: none; display: inline-block;">📍 Ver Ubicación</a>
             </div>
-            <div class="reveal" style="background: rgba(255,255,255,0.95); padding: 35px 25px; border-radius: 20px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div class="reveal" style="background: rgba(255,255,255,0.9); padding: 30px; border-radius: 15px; width: 90%; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
                 <h3 style="font-family: 'Cinzel Decorative'; color: var(--rosa-fuerte);">Recepción Social</h3>
                 <p style="margin: 10px 0;">6:00 PM | Poliforum</p>
-                <p style="font-size: 0.8rem; margin-bottom: 10px;">Calle 24 Colonia Centro</p>
-                <a href="#" class="btn-mapa">📍 Cómo Llegar</a>
+                <a href="#" style="background: white; color: var(--rosa-fuerte); border: 1px solid var(--rosa-fuerte); font-size: 0.75rem; padding: 10px 20px; border-radius: 50px; text-decoration: none; display: inline-block;">📍 Cómo Llegar</a>
             </div>
         </section>
 
         <section>
-            <div class="reveal" style="background: rgba(255,255,255,0.85); padding: 40px 25px; border-radius: 25px; width: 90%; backdrop-filter: blur(10px);">
+            <div class="reveal" style="background: rgba(255,255,255,0.85); padding: 35px 25px; border-radius: 20px; width: 90%; backdrop-filter: blur(10px);">
                 <h3 style="font-family: 'Cinzel Decorative'; margin-bottom: 20px;">Confirmar Asistencia</h3>
-                <input type="text" placeholder="TU NOMBRE COMPLETO" style="width:100%; padding: 18px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 15px; text-align: center;">
+                <input type="text" placeholder="TU NOMBRE COMPLETO" style="width:100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px; text-align: center;">
                 <a href="https://wa.me/0000000000?text=Hola,%20confirmo%20mi%20asistencia" class="btn-ws">Confirmar por WhatsApp</a>
                 <p style="margin-top: 25px; font-style: italic; opacity: 0.8; font-size: 0.9rem;">"Porque para Dios nada es imposible" - Lucas 1:37</p>
             </div>
-            <img src="fotofinal.png" class="reveal-zoom" style="width: 260px; border-radius: 20px; margin-top: 50px; border: 8px solid white; box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
+            <img src="fotofinal.png" class="reveal-zoom" style="width: 250px; border-radius: 15px; margin-top: 40px; border: 6px solid white; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
         </section>
 
     </main>
 
     <script>
-        function abrirInvitacion() {
-            const inicial = document.getElementById('pantalla-inicial');
+        function animarYEntrar() {
+            const sobre = document.getElementById('sobre-contenedor');
+            const pantalla = document.getElementById('pantalla-inicial');
             const musica = document.getElementById('track');
             const app = document.getElementById('app');
             const video = document.getElementById('video-fondo');
 
-            inicial.style.transform = 'translateY(-100%)';
-            inicial.style.opacity = '0';
+            // 1. Abrir el sobre y sacar la polaroid
+            sobre.classList.add('abierto');
             musica.play();
-            video.style.display = 'block';
-            video.play();
 
+            // 2. Después de un momento, desvanecer pantalla inicial y mostrar invitacion
             setTimeout(() => {
-                inicial.style.display = 'none';
-                app.style.display = 'block';
-                window.scrollTo(0,0);
-                crearEstrellas();
-                reveal();
-            }, 1200);
+                pantalla.style.opacity = '0';
+                video.style.display = 'block';
+                video.play();
+                
+                setTimeout(() => {
+                    pantalla.style.display = 'none';
+                    app.style.display = 'block';
+                    window.scrollTo(0,0);
+                    crearEstrellas();
+                    reveal();
+                }, 1000);
+            }, 2500); // Tiempo suficiente para ver la foto salir
         }
 
         function crearEstrellas() {
             const contenedor = document.getElementById('capa-estrellas');
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 35; i++) {
                 const estrella = document.createElement('div');
                 estrella.className = 'estrella';
                 const size = Math.random() * 4 + 2 + 'px';
