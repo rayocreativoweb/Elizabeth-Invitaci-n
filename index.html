@@ -171,37 +171,45 @@
             line-height: 1.3;
         }
 
-        /* 3. PERGAMINO INTERACTIVO OPTIMIZADO */
-        .pergamino-img {
+        /* 3. PERGAMINO CON CAPAS SEPARADAS (SOLUCIÓN AL AGRANDADO) */
+        .pergamino-wrapper {
             width: 90%;
             max-width: 450px;
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 1.2s ease-out, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
-            /* Sombra resaltada más profunda y realista */
-            filter: drop-shadow(0 20px 16px rgba(0,0,0,0.35)); 
-            cursor: pointer;
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+            /* Sombra realista de alta densidad */
+            filter: drop-shadow(0 18px 15px rgba(0,0,0,0.35)); 
         }
         
-        .pergamino-img.visible {
+        .pergamino-wrapper.visible {
             opacity: 1;
             transform: translateY(0);
-            animation: flotarPergaminoBucle 4s ease-in-out infinite alternate;
-        }
-
-        /* Efecto de agrandado leve al presionar o pasar el cursor */
-        .pergamino-img.visible:active, .pergamino-img.visible:hover {
-            transform: scale(1.05) !important;
-            filter: drop-shadow(0 28px 22px rgba(0,0,0,0.4));
+            /* Ejecuta el bucle de flotado en el contenedor */
+            animation: flotarPergaminoBucle 4.5s ease-in-out infinite alternate;
         }
 
         @keyframes flotarPergaminoBucle {
             0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-6px) rotate(0.5deg); }
-            100% { transform: translateY(0) rotate(-0.5deg); }
+            50% { transform: translateY(-7px) rotate(0.6deg); }
+            100% { transform: translateY(0) rotate(-0.6deg); }
         }
 
-        /* 4. CALENDARIO SIN FONDO CON CUADRÍCULA COMPLETA */
+        .pergamino-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent; /* Elimina cuadro azul en móviles */
+        }
+
+        /* Al tocar o hacer clic, la imagen interna se agranda libremente sin romper el bucle */
+        .pergamino-img:active, .pergamino-img:hover {
+            transform: scale(1.07);
+        }
+
+        /* 4. CALENDARIO SIN FONDO CON CUADRÍCULA */
         .seccion-calendario {
             background-color: var(--rosa-fuerte);
             background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
@@ -233,7 +241,7 @@
             width: 100%; 
             max-width: 320px; 
             margin: 0 auto; 
-            background: transparent; /* Fondo eliminado */
+            background: transparent;
         }
 
         .dias-letras {
@@ -245,14 +253,9 @@
             margin-bottom: 8px;
             opacity: 0.95;
         }
-        .dias-letras span { padding-bottom: 5px; }
 
-        .dias-num {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-        }
+        .dias-num { display: grid; grid-template-columns: repeat(7, 1fr); }
 
-        /* Cuadrícula interna minimalista aplicada a todas las celdas */
         .dias-num span, .dias-num .num {
             aspect-ratio: 1;
             display: flex;
@@ -336,7 +339,6 @@
         .cuenta-regresiva-texto {
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            /* Escalado dinámico ultraconservador para blindar la línea única en pantallas micro */
             font-size: clamp(7.5px, 2.1vw, 11px); 
             letter-spacing: 0.6em;
             font-weight: 600;
@@ -519,24 +521,24 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 3. PERGAMINO -->
+    <!-- 3. PERGAMINO REESTRUCTURADO -->
     <section>
-        <img src="pergamino.png" class="pergamino-img" id="pergamino">
+        <div class="pergamino-wrapper" id="pergamino">
+            <img src="pergamino.png" class="pergamino-img">
+        </div>
     </section>
 
     <div class="separador-plata"></div>
 
-    <!-- 4. CALENDARIO CON CUADRÍCULA TRANSPARENTE -->
+    <!-- 4. CALENDARIO CON CUADRÍCULA -->
     <div class="seccion-calendario">
         <h2 class="cal-header">Guarda la fecha</h2>
         <div class="cal-mes-ano">Mayo 2026</div>
         <div class="calendario">
-            <!-- Iniciales de los días alineadas -->
             <div class="dias-letras">
                 <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
             </div>
             <div class="dias-num">
-                <!-- Celdas vacías con bordes integrados -->
                 <span></span><span></span><span></span><span></span><span></span>
                 <span class="num">1</span><span class="num">2</span><span class="num">3</span><span class="num">4</span><span class="num">5</span><span class="num">6</span><span class="num">7</span><span class="num">8</span><span class="num">9</span><span class="num">10</span><span class="num">11</span><span class="num">12</span><span class="num">13</span><span class="num">14</span><span class="num">15</span><span class="num">16</span><span class="num">17</span><span class="num">18</span><span class="num">19</span><span class="num">20</span><span class="num">21</span><span class="num">22</span><span class="num">23</span><span class="num">24</span><span class="num">25</span><span class="num">26</span><span class="num">27</span><span class="num">28</span><span class="num">29</span>
                 <span class="num">
