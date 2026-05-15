@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>XV Elizabeth García</title>
-    <!-- Agregada la fuente Alex Brush para una cursiva más legible y elegante -->
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --rosa-pastel: #fce4ec;
             --rosa-fuerte: #d81b60;
-            --texto: #4e342e;
-            --crema-papel: #fbf5e8;
+            --texto: #2d1a17;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,34 +34,36 @@
             width: 100%;
         }
 
-        /* 1. SECCIÓN FRASE INICIAL CON TEXTURA Y ESCRITURA */
+        /* 1. SECCIÓN FRASE INICIAL CON TU FONDO PERSONALIZADO */
         .seccion-intro {
-            background-color: var(--crema-papel);
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* Textura papel */
+            background-image: url('FondoText.jpg');
+            background-size: cover;
+            background-position: center;
             width: 100%;
-            padding: 60px 20px;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.05);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 80px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
         }
 
         .frase-intro {
             font-family: 'Alex Brush', cursive;
-            font-size: clamp(1.8rem, 7vw, 2.5rem);
+            font-size: clamp(1.8rem, 7vw, 2.8rem);
             line-height: 1.5;
-            color: #2d1a17; /* Alto contraste */
-            max-width: 550px;
-            margin: 0 auto;
-            display: inline-block;
-            /* Animación de escritura fluida */
+            color: var(--texto);
+            max-width: 600px;
+            /* Animación de escritura */
             clip-path: inset(0 100% 0 0);
-            animation: efectoEscritura 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: efectoEscritura 4.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         @keyframes efectoEscritura {
             to { clip-path: inset(0 0 0 0); }
         }
 
-        /* 2. SLIDESHOW Y NOMBRE */
+        /* 2. SLIDESHOW */
         .contenedor-fotos {
             position: relative;
             width: 80vw;
@@ -81,7 +81,7 @@
             transition: opacity 1s ease-in-out;
             border: 6px solid white;
             border-radius: 120px 120px 0 0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             object-fit: cover;
         }
 
@@ -92,7 +92,7 @@
             font-size: clamp(2rem, 8vw, 3rem);
             color: var(--rosa-fuerte);
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-shadow: 2px 2px 0px white;
         }
 
@@ -100,44 +100,22 @@
         .pergamino-img {
             width: 90%;
             max-width: 450px;
-            height: auto;
             opacity: 0;
             transform: translateY(30px);
             transition: all 1.2s ease-out;
         }
         .pergamino-img.visible { opacity: 1; transform: translateY(0); }
 
-        /* 4. CALENDARIO GIGANTE OPTIMIZADO */
+        /* 4. CALENDARIO CON CORAZÓN CENTRADO */
         .seccion-calendario {
             background-color: var(--rosa-fuerte);
             background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
             color: white;
             width: 100%;
             padding: 60px 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        .cal-header {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 1.4rem;
-            margin-bottom: 25px;
-            letter-spacing: 4px;
-        }
-
-        .calendario {
-            width: 95%;
-            max-width: 350px;
-            margin: 0 auto;
-        }
-
-        .dias-letras {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 0.7rem;
-            opacity: 0.9;
-        }
+        .calendario { width: 95%; max-width: 350px; margin: 0 auto; }
 
         .dias-num {
             display: grid;
@@ -149,106 +127,84 @@
 
         .num {
             font-size: 1.1rem;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            z-index: 1;
         }
 
-        /* CENTRADO PERFECTO DEL CORAZÓN DIBUJADO */
         .corazon-dibujo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             fill: none;
             stroke: white;
             stroke-width: 2.5;
             stroke-dasharray: 200;
             stroke-dashoffset: 200;
             animation: dibujarCorazon 3.5s linear infinite;
-            z-index: -1;
         }
 
         @keyframes dibujarCorazon {
             0% { stroke-dashoffset: 200; opacity: 0; }
             40% { stroke-dashoffset: 0; opacity: 1; }
-            80% { opacity: 1; }
             100% { stroke-dashoffset: -200; opacity: 0; }
         }
 
-        /* 5. SECCIÓN FRASE BÍBLICA CON FONDO */
+        /* 5. FRASE BÍBLICA CON TU FONDO PERSONALIZADO */
         .seccion-frase-biblica {
-            background-color: #fff6f8;
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            background-image: url('FondoText.jpg');
+            background-size: cover;
+            background-position: center;
             width: 100%;
-            padding: 50px 20px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
-            border-top: 1px solid rgba(216, 27, 96, 0.05);
-            border-bottom: 1px solid rgba(216, 27, 96, 0.05);
+            padding: 80px 20px;
+            text-align: center;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
         }
 
         .frase-quince {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(2rem, 7vw, 2.6rem);
+            font-size: clamp(2.2rem, 8vw, 3rem);
             color: var(--rosa-fuerte);
             max-width: 90%;
             margin: 0 auto;
-            line-height: 1.3;
         }
 
         .cita-biblica {
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 0.3em; /* Separación de caracteres estilo alta costura (300 pt) */
-            font-size: 0.8rem;
+            /* 900pt de tracking adaptado a web (0.9em) */
+            letter-spacing: 0.9em; 
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--texto);
             display: block;
-            margin-top: 15px;
+            margin-top: 30px;
+            padding-left: 0.9em; /* Para centrar compensando el espacio final */
         }
 
-        /* 6. CONTADOR BOXED */
+        /* 6. CONTADOR */
         .contenedor-blanco-contador {
             background: rgba(255, 255, 255, 0.85);
             width: 90%;
             max-width: 400px;
-            border-radius: 15px;
-            padding: 30px 10px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-            border: 1px solid white;
+            border-radius: 20px;
+            padding: 35px 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .grid-contador {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            width: 100%;
-        }
-
+        .grid-contador { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; }
         .bloque { border-right: 1px solid rgba(216, 27, 96, 0.2); }
         .bloque:last-child { border-right: none; }
+        .cifra { font-family: 'Cinzel Decorative', serif; font-size: 1.6rem; font-weight: bold; color: var(--rosa-fuerte); }
+        .etiqueta { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: #888; }
 
-        .cifra {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--rosa-fuerte);
-            display: block;
-        }
-
-        .etiqueta {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #888;
-        }
-
-        /* 7. GALERIA SCROLLER */
+        /* 7. GALERIA */
         .galeria-scroller {
             display: flex;
             overflow-x: auto;
@@ -257,13 +213,11 @@
             width: 100vw;
             scrollbar-width: none;
         }
-        .galeria-scroller::-webkit-scrollbar { display: none; }
         .galeria-scroller img {
-            height: 250px;
-            width: auto;
-            border-radius: 10px;
-            border: 4px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 280px;
+            border-radius: 15px;
+            border: 5px solid white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             flex-shrink: 0;
         }
 
@@ -271,14 +225,12 @@
 </head>
 <body>
 
-    <!-- 1. FRASE INICIAL CON TEXTURA Y TRANSICIÓN -->
     <div class="seccion-intro">
         <p class="frase-intro">
             Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida.
         </p>
     </div>
 
-    <!-- 2. SLIDESHOW ADAPTABLE -->
     <section>
         <div class="contenedor-fotos">
             <img src="Galfoto1.png" class="slide active">
@@ -290,18 +242,13 @@
         <h1 class="nombre-quince">Elizabeth García</h1>
     </section>
 
-    <!-- 3. PERGAMINO REVEAL -->
     <section>
         <img src="pergamino.png" class="pergamino-img" id="pergamino">
     </section>
 
-    <!-- 4. CALENDARIO GIGANTE CON CORAZÓN CENTRADO -->
     <div class="seccion-calendario">
-        <h2 class="cal-header">Guarda la fecha</h2>
+        <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 25px; letter-spacing: 4px; text-align: center;">Guarda la fecha</h2>
         <div class="calendario">
-            <div class="dias-letras">
-                <span>DOM</span><span>LUN</span><span>MAR</span><span>MIE</span><span>JUE</span><span>VIE</span><span>SAB</span>
-            </div>
             <div class="dias-num">
                 <span></span><span></span><span></span><span></span><span></span>
                 <span class="num">1</span><span class="num">2</span><span class="num">3</span><span class="num">4</span><span class="num">5</span><span class="num">6</span><span class="num">7</span><span class="num">8</span><span class="num">9</span><span class="num">10</span><span class="num">11</span><span class="num">12</span><span class="num">13</span><span class="num">14</span><span class="num">15</span><span class="num">16</span><span class="num">17</span><span class="num">18</span><span class="num">19</span><span class="num">20</span><span class="num">21</span><span class="num">22</span><span class="num">23</span><span class="num">24</span><span class="num">25</span><span class="num">26</span><span class="num">27</span><span class="num">28</span><span class="num">29</span>
@@ -316,7 +263,6 @@
         </div>
     </div>
 
-    <!-- 5. FRASE QUINCEAÑERA CRISTIANA CON FONDO PRO -->
     <div class="seccion-frase-biblica">
         <p class="frase-quince">
             "Pongo mi vida en manos del Señor, confío en Él y Él actuará."
@@ -324,7 +270,6 @@
         </p>
     </div>
 
-    <!-- 6. CONTADOR BOXED -->
     <section>
         <div class="contenedor-blanco-contador">
             <div class="grid-contador">
@@ -336,9 +281,8 @@
         </div>
     </section>
 
-    <!-- 7. GALERIA -->
     <section>
-        <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 5px; font-size: 1.2rem;">Galería de Recuerdos</h2>
+        <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 15px; font-size: 1.3rem;">Mis Recuerdos</h2>
         <div class="galeria-scroller">
             <img src="Galfoto1.png">
             <img src="Galfoto2.png">
@@ -349,7 +293,7 @@
     </section>
 
     <script>
-        // Slideshow automático 4s
+        // Slideshow automático
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         setInterval(() => {
@@ -358,7 +302,7 @@
             slides[currentSlide].classList.add('active');
         }, 4000);
 
-        // Scroll Reveal para el Pergamino
+        // Scroll Reveal
         const pergamino = document.getElementById('pergamino');
         window.addEventListener('scroll', () => {
             const pos = pergamino.getBoundingClientRect().top;
@@ -367,7 +311,7 @@
             }
         });
 
-        // Contador regresivo al 30 de Mayo 2026
+        // Contador
         const fecha = new Date('May 30, 2026 15:30:00').getTime();
         setInterval(() => {
             const ahora = new Date().getTime();
