@@ -8,214 +8,163 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { 
-            --rosa-pastel: #fce4ec; 
-            --crema-sobre: #fff5e1;
             --rosa-fuerte: #f06292; 
+            --rosa-claro: #fce4ec;
             --oro: #d4af37;
-            --texto: #4e342e; 
+            --crema: #fff9f0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             font-family: 'Montserrat', sans-serif; 
-            color: var(--texto); 
-            overflow-x: hidden; 
+            background-color: var(--rosa-claro);
+            /* Tu imagen larga que se mueve con el scroll */
             background-image: url('FondoPro.png');
             background-size: 100% auto;
             background-attachment: scroll;
             background-repeat: repeat-y;
-            background-color: var(--rosa-pastel);
+            overflow-x: hidden;
         }
 
-        /* --- PANTALLA INICIAL: SOBRE ANIMADO --- */
-        #pantalla-inicial {
+        /* --- CINE-ENTRADA: EL SOBRE 3D --- */
+        #pantalla-apertura {
             position: fixed;
             inset: 0;
-            z-index: 5000;
-            background-color: var(--rosa-pastel);
+            z-index: 9000;
+            background: var(--rosa-claro);
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            padding: 40px 20px;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .texto-intro {
-            font-style: italic;
-            font-size: 1.05rem;
-            text-align: center;
-            max-width: 320px;
-            line-height: 1.6;
-            z-index: 10;
-        }
-
-        /* Estructura del Sobre Animado */
-        .wrapper-sobre {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            perspective: 1000px;
-        }
-
-        .sobre-cuerpo {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--crema-sobre);
-            border: 1px solid #e6d5b8;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            z-index: 2;
-        }
-
-        /* Solapa Superior */
-        .sobre-solapa {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--crema-sobre);
-            border: 1px solid #e6d5b8;
-            clip-path: polygon(0 0, 50% 55%, 100% 0);
-            z-index: 5;
-            transform-origin: top;
-            transition: transform 0.8s ease-in-out;
-        }
-
-        /* Foto Polaroid que sale del sobre */
-        .polaroid-inicial {
-            position: absolute;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            background: white;
-            padding: 8px 8px 25px 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            z-index: 3;
-            opacity: 0;
-            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
-        }
-
-        .polaroid-inicial img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-        }
-
-        /* Botón Redondo */
-        .btn-abrir {
-            position: absolute;
-            right: -25px;
-            bottom: 20px;
-            width: 90px;
-            height: 90px;
-            background: var(--rosa-fuerte);
-            color: white;
-            border: 4px solid white;
-            border-radius: 50%;
-            font-weight: 700;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            cursor: pointer;
-            z-index: 100;
-            box-shadow: 0 8px 20px rgba(240, 98, 146, 0.3);
-            transition: 0.3s;
+            transition: opacity 1s ease;
         }
 
-        /* Animación al abrir */
-        .abierto .sobre-solapa { transform: rotateX(180deg); z-index: 1; }
-        .abierto .polaroid-inicial { transform: translate(-50%, -100%) rotate(-5deg); opacity: 1; }
+        .texto-sup { text-align: center; padding: 20px; font-style: italic; font-size: 0.9rem; max-width: 300px; margin-bottom: 20px; }
 
-        .nombre-inicio {
-            font-family: 'Cinzel Decorative';
-            font-size: 1.7rem;
-            color: var(--rosa-fuerte);
-            letter-spacing: 2px;
-            text-align: center;
+        .envelope-wrapper { position: relative; width: 300px; height: 200px; perspective: 1000px; cursor: pointer; }
+        
+        .envelope-back { position: absolute; width: 100%; height: 100%; background: var(--crema); border: 1px solid #e0d0b0; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        
+        .envelope-flap { 
+            position: absolute; top: 0; width: 100%; height: 100%; 
+            background: var(--crema); border: 1px solid #e0d0b0;
+            clip-path: polygon(0 0, 50% 55%, 100% 0); 
+            z-index: 4; transform-origin: top; transition: 0.8s; 
         }
 
-        /* --- CONTENIDO INVITACIÓN --- */
-        #video-fondo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; display: none; }
+        .polaroid-inside {
+            position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+            width: 130px; background: white; padding: 10px 10px 25px 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 2; opacity: 0;
+            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+        }
+        .polaroid-inside img { width: 100%; height: 130px; object-fit: cover; }
+
+        .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-wrapper.open .polaroid-inside { transform: translate(-50%, -110%) rotate(-5deg); opacity: 1; }
+
+        .btn-redondo {
+            position: absolute; right: -20px; bottom: -20px; width: 80px; height: 80px;
+            background: var(--rosa-fuerte); color: white; border-radius: 50%; border: 4px solid white;
+            font-size: 0.65rem; font-weight: bold; text-transform: uppercase;
+            display: flex; justify-content: center; align-items: center; text-align: center;
+            z-index: 10; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s;
+        }
+
+        /* --- CONTENIDO DE LA INVITACIÓN --- */
+        #video-fondo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; display: none; opacity: 0.6; }
         #capa-estrellas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        .estrella { position: absolute; background: white; border-radius: 50%; opacity: 0; animation: destello var(--d) infinite; }
-        @keyframes destello { 0%, 100% { opacity: 0; transform: scale(0.3); } 50% { opacity: 0.7; transform: scale(1.1); } }
+        .star { position: absolute; background: white; border-radius: 50%; animation: blink var(--d) infinite; opacity: 0; }
+        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 0.8; } }
 
-        section { padding: 50px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .reveal { opacity: 0; transform: translateY(25px); transition: 0.8s ease-out; }
-        .reveal-zoom { opacity: 0; transform: scale(0.9); transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .active { opacity: 1 !important; transform: translate(0) scale(1) !important; }
+        section { min-height: 80vh; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
-        .foto-quince { width: 250px; height: 350px; object-fit: cover; border: 8px solid white; border-radius: 125px 125px 10px 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .nombre-xl { font-family: 'Great Vibes', cursive; font-size: clamp(3.5rem, 15vw, 5rem); color: var(--rosa-fuerte); }
-        .pergamino-img { width: 100%; max-width: 480px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
+        /* Efecto Cristal */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 350px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
 
-        .cal-box { background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 15px; width: 100%; max-width: 300px; border: 1px solid var(--rosa-fuerte); backdrop-filter: blur(5px); }
+        .foto-perfil { width: 250px; border: 8px solid white; border-radius: 125px 125px 0 0; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .nombre-quince { font-family: 'Great Vibes', cursive; font-size: clamp(4rem, 15vw, 5.5rem); color: var(--rosa-fuerte); margin: 10px 0; }
+
+        .pergamino-final { width: 100%; max-width: 500px; margin: 20px 0; }
+
+        /* Calendario Pro */
+        .cal-box { width: 100%; max-width: 300px; background: white; border-radius: 15px; padding: 15px; border: 1px solid var(--rosa-fuerte); }
         .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; font-size: 0.8rem; }
-        .cal-dia.especial { color: var(--rosa-fuerte); font-weight: bold; position: relative; }
-        .corona { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); color: var(--rosa-fuerte); font-size: 1.1rem; }
+        .cal-especial { color: var(--rosa-fuerte); font-weight: bold; position: relative; }
+        .corona-svg { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); color: var(--oro); font-size: 1.2rem; }
 
-        .box-t { background: white; padding: 12px; border-radius: 12px; min-width: 72px; border-bottom: 4px solid var(--rosa-fuerte); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .box-t span { font-weight: bold; font-size: 1.5rem; color: var(--rosa-fuerte); display: block; }
+        .timer-grid { display: flex; gap: 10px; margin-top: 20px; }
+        .t-box { background: white; padding: 10px; border-radius: 10px; min-width: 70px; border-bottom: 3px solid var(--rosa-fuerte); }
+        .t-box span { font-weight: bold; font-size: 1.5rem; color: var(--rosa-fuerte); display: block; }
 
-        .scroller { display: flex; overflow-x: auto; gap: 15px; padding: 20px; width: 100vw; scrollbar-width: none; }
-        .scroller img { height: 320px; border-radius: 15px; border: 6px solid white; flex-shrink: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .scroller-galeria { display: flex; overflow-x: auto; gap: 15px; padding: 20px; width: 100vw; scrollbar-width: none; }
+        .scroller-galeria img { height: 320px; border-radius: 15px; border: 5px solid white; flex-shrink: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        .btn-ws { padding: 16px 30px; background: #25d366; border-radius: 50px; color: white; font-weight: 700; text-decoration: none; display: inline-block; width: 100%; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+        .btn-lujo { 
+            padding: 15px 30px; background: white; border: 1px solid var(--rosa-fuerte); border-radius: 50px; 
+            color: var(--rosa-fuerte); font-weight: bold; text-decoration: none; margin-top: 15px; display: inline-block;
+        }
+
+        /* Animaciones */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .active { opacity: 1; transform: translateY(0); }
+
     </style>
 </head>
 <body>
 
+    <!-- VIDEO Y EFECTOS -->
     <video id="video-fondo" loop muted playsinline><source src="FondoVideo.mp4" type="video/mp4"></video>
     <div id="capa-estrellas"></div>
 
     <!-- PANTALLA INICIAL -->
-    <div id="pantalla-inicial">
-        <p class="texto-intro">"Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida."</p>
+    <div id="pantalla-apertura">
+        <p class="texto-sup">"Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida."</p>
         
-        <div class="wrapper-sobre" id="sobre-contenedor">
-            <div class="sobre-solapa"></div>
-            <div class="sobre-cuerpo"></div>
-            <!-- Foto Polaroid que sale del sobre -->
-            <div class="polaroid-inicial">
+        <div class="envelope-wrapper" id="sobre" onclick="abrirTodo()">
+            <div class="envelope-flap"></div>
+            <div class="envelope-back"></div>
+            <div class="polaroid-inside">
                 <img src="Foto1.png" alt="Elizabeth">
             </div>
-            <div class="btn-abrir" onclick="animarYEntrar()">Más<br>detalles</div>
+            <div class="btn-redondo">Más<br>Detalles</div>
         </div>
 
-        <h2 class="nombre-inicio">Elizabeth García Huchin</h2>
-
-        <p style="font-size: 0.65rem; letter-spacing: 3px; opacity: 0.6; text-transform: uppercase;">Por favor activa el sonido</p>
+        <h2 style="font-family: 'Cinzel Decorative'; color: var(--rosa-fuerte); margin-top: 30px; letter-spacing: 3px;">Elizabeth García</h2>
+        <p style="font-size: 0.6rem; margin-top: 20px; letter-spacing: 2px; opacity: 0.6;">POR FAVOR ACTIVA EL SONIDO</p>
     </div>
 
-    <audio id="track" src="musica.mp3" loop></audio>
+    <audio id="musica" src="musica.mp3" loop></audio>
 
     <!-- INVITACIÓN -->
     <main id="app" style="display:none">
         
         <section>
-            <img src="Foto1.png" class="foto-quince reveal-zoom">
-            <h1 class="nombre-xl reveal">Elizabeth</h1>
-            <p class="reveal" style="letter-spacing: 6px; font-weight: 300;">MIS XV AÑOS</p>
+            <img src="Foto1.png" class="foto-perfil reveal">
+            <h1 class="nombre-quince reveal">Elizabeth</h1>
+            <p class="reveal" style="letter-spacing: 8px; font-weight: 300; text-shadow: 1px 1px 2px #fff;">MIS XV AÑOS</p>
         </section>
 
         <section>
-            <div class="reveal-zoom" style="width: 100%; display: flex; justify-content: center;">
-                <img src="pergamino.png" class="pergamino-img">
-            </div>
+            <img src="pergamino.png" class="pergamino-final reveal">
         </section>
 
         <section>
-            <div class="reveal">
-                <p style="margin-bottom: 10px; letter-spacing: 3px; font-weight: 600;">MAYO 2026</p>
+            <div class="glass-card reveal">
+                <p style="margin-bottom: 15px; font-weight: 600; letter-spacing: 2px;">MAYO 2026</p>
                 <div class="cal-box">
-                    <div class="cal-grid" style="font-weight: bold; color: #999; margin-bottom: 10px;">
+                    <div class="cal-grid" style="color: #999; margin-bottom: 10px; font-weight: bold;">
                         <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
                     </div>
                     <div class="cal-grid">
@@ -224,7 +173,7 @@
                         <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
                         <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
                         <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span>
-                        <span class="cal-dia especial"><i class="fas fa-crown corona"></i>30</span>
+                        <span class="cal-especial"><i class="fa-solid fa-crown corona-svg"></i>30</span>
                         <span>31</span>
                     </div>
                 </div>
@@ -232,104 +181,98 @@
         </section>
 
         <section>
-            <div class="reloj-grid reveal">
-                <div class="box-t"><span id="d">00</span><small>Días</small></div>
-                <div class="box-t"><span id="h">00</span><small>Hrs</small></div>
-                <div class="box-t"><span id="m">00</span><small>Min</small></div>
-                <div class="box-t"><span id="s">00</span><small>Seg</small></div>
+            <p class="reveal" style="margin-bottom: 10px; font-size: 0.9rem;">"La cuenta regresiva ha comenzado"</p>
+            <div class="timer-grid reveal">
+                <div class="t-box"><span id="d">00</span><small>Días</small></div>
+                <div class="t-box"><span id="h">00</span><small>Hrs</small></div>
+                <div class="t-box"><span id="m">00</span><small>Min</small></div>
+                <div class="t-box"><span id="s">00</span><small>Seg</small></div>
             </div>
-            <p class="reveal" style="margin-top: 15px; font-size: 0.9rem;">"La cuenta regresiva ha comenzado"</p>
         </section>
 
         <section>
-            <h2 class="reveal" style="font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--rosa-fuerte); margin-bottom: 20px;">Galería</h2>
-            <div class="scroller reveal-zoom">
+            <h2 class="reveal" style="font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--rosa-fuerte);">Galería</h2>
+            <div class="scroller-galeria reveal">
                 <img src="Galfoto1.png"><img src="Galfoto2.png"><img src="Galfoto3.png"><img src="Galfoto4.png"><img src="Galfoto5.png">
             </div>
         </section>
 
         <section>
-            <div class="reveal" style="background: rgba(255,255,255,0.9); padding: 30px; border-radius: 15px; width: 90%; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+            <div class="glass-card reveal" style="margin-bottom: 20px;">
                 <h3 style="font-family: 'Cinzel Decorative'; color: var(--rosa-fuerte);">Ceremonia de Acción de Gracias</h3>
-                <p style="margin: 10px 0;">3:30 PM | Templo Jordán</p>
-                <a href="#" style="background: white; color: var(--rosa-fuerte); border: 1px solid var(--rosa-fuerte); font-size: 0.75rem; padding: 10px 20px; border-radius: 50px; text-decoration: none; display: inline-block;">📍 Ver Ubicación</a>
+                <p>3:30 PM | Templo Jordán</p>
+                <a href="#" class="btn-lujo">📍 Ubicación</a>
             </div>
-            <div class="reveal" style="background: rgba(255,255,255,0.9); padding: 30px; border-radius: 15px; width: 90%; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+            <div class="glass-card reveal">
                 <h3 style="font-family: 'Cinzel Decorative'; color: var(--rosa-fuerte);">Recepción Social</h3>
-                <p style="margin: 10px 0;">6:00 PM | Poliforum</p>
-                <a href="#" style="background: white; color: var(--rosa-fuerte); border: 1px solid var(--rosa-fuerte); font-size: 0.75rem; padding: 10px 20px; border-radius: 50px; text-decoration: none; display: inline-block;">📍 Cómo Llegar</a>
+                <p>6:00 PM | Poliforum</p>
+                <a href="#" class="btn-lujo">📍 Mapa</a>
             </div>
         </section>
 
         <section>
-            <div class="reveal" style="background: rgba(255,255,255,0.85); padding: 35px 25px; border-radius: 20px; width: 90%; backdrop-filter: blur(10px);">
+            <div class="glass-card reveal">
                 <h3 style="font-family: 'Cinzel Decorative'; margin-bottom: 20px;">Confirmar Asistencia</h3>
-                <input type="text" placeholder="TU NOMBRE COMPLETO" style="width:100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px; text-align: center;">
-                <a href="https://wa.me/0000000000?text=Hola,%20confirmo%20mi%20asistencia" class="btn-ws">Confirmar por WhatsApp</a>
-                <p style="margin-top: 25px; font-style: italic; opacity: 0.8; font-size: 0.9rem;">"Porque para Dios nada es imposible" - Lucas 1:37</p>
+                <input type="text" placeholder="TU NOMBRE" style="width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px; text-align: center;">
+                <a href="https://wa.me/0000000000" class="btn-lujo" style="background: #25d366; color: white; border: none; width: 100%;">WhatsApp</a>
             </div>
-            <img src="fotofinal.png" class="reveal-zoom" style="width: 250px; border-radius: 15px; margin-top: 40px; border: 6px solid white; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+            <img src="fotofinal.png" class="reveal" style="width: 250px; border-radius: 15px; border: 5px solid white; margin-top: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
         </section>
 
     </main>
 
     <script>
-        function animarYEntrar() {
-            const sobre = document.getElementById('sobre-contenedor');
-            const pantalla = document.getElementById('pantalla-inicial');
+        function abrirTodo() {
+            const sobre = document.getElementById('sobre');
+            const apertura = document.getElementById('pantalla-apertura');
             const musica = document.getElementById('track');
-            const app = document.getElementById('app');
             const video = document.getElementById('video-fondo');
+            const app = document.getElementById('app');
 
-            // 1. Abrir el sobre y sacar la polaroid
-            sobre.classList.add('abierto');
+            sobre.classList.add('open');
             musica.play();
 
-            // 2. Después de un momento, desvanecer pantalla inicial y mostrar invitacion
             setTimeout(() => {
-                pantalla.style.opacity = '0';
+                apertura.style.opacity = '0';
                 video.style.display = 'block';
                 video.play();
-                
                 setTimeout(() => {
-                    pantalla.style.display = 'none';
+                    apertura.style.display = 'none';
                     app.style.display = 'block';
                     window.scrollTo(0,0);
                     crearEstrellas();
                     reveal();
                 }, 1000);
-            }, 2500); // Tiempo suficiente para ver la foto salir
+            }, 2500);
         }
 
         function crearEstrellas() {
-            const contenedor = document.getElementById('capa-estrellas');
-            for (let i = 0; i < 35; i++) {
-                const estrella = document.createElement('div');
-                estrella.className = 'estrella';
-                const size = Math.random() * 4 + 2 + 'px';
-                estrella.style.width = estrella.style.height = size;
-                estrella.style.left = Math.random() * 100 + 'vw';
-                estrella.style.top = Math.random() * 100 + 'vh';
-                estrella.style.setProperty('--d', Math.random() * 3 + 2 + 's');
-                contenedor.appendChild(estrella);
+            const container = document.getElementById('capa-estrellas');
+            for(let i=0; i<40; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
+                s.style.left = Math.random() * 100 + '%';
+                s.style.top = Math.random() * 100 + '%';
+                s.style.width = s.style.height = (Math.random() * 3 + 2) + 'px';
+                s.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
+                container.appendChild(s);
             }
         }
 
-        const fechaFinal = new Date('May 30, 2026 15:30:00').getTime();
+        const fechaEvento = new Date('May 30, 2026 15:30:00').getTime();
         setInterval(() => {
             const ahora = new Date().getTime();
-            const diff = fechaFinal - ahora;
-            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            const d = fechaEvento - ahora;
+            document.getElementById('d').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+            document.getElementById('h').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('m').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('s').innerText = Math.floor((d % (1000 * 60)) / 1000);
         }, 1000);
 
         function reveal() {
-            const items = document.querySelectorAll('.reveal, .reveal-zoom');
+            const items = document.querySelectorAll('.reveal');
             items.forEach(i => {
-                const rect = i.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 50) i.classList.add('active');
+                if (i.getBoundingClientRect().top < window.innerHeight - 50) i.classList.add('active');
             });
         }
         window.addEventListener('scroll', reveal);
