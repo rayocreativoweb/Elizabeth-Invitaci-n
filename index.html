@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>XV Elizabeth García</title>
+    <title>XV Elizabeth García Huchín</title>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -99,15 +99,16 @@
             100% { left: 150%; }
         }
 
-        /* 1. SECCIÓN FRASE INICIAL (CORREGIDA PARA TOTAL VISIBILIDAD) */
+        /* 1. SECCIÓN FRASE INICIAL */
         .seccion-intro {
             background-image: url('FondoText.png');
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
             width: 100%;
-            padding: 140px 20px; /* Espacio extra arriba y abajo */
+            padding: 130px 20px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
@@ -115,17 +116,27 @@
 
         .frase-intro {
             font-family: 'Alex Brush', cursive;
-            font-size: clamp(1.8rem, 7vw, 2.8rem);
-            line-height: 1.5;
+            font-size: clamp(1.8rem, 7vw, 2.6rem);
+            line-height: 1.4;
             color: var(--texto);
-            max-width: 600px;
+            max-width: 550px;
             clip-path: inset(0 100% 0 0);
             animation: efectoEscritura 4.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         @keyframes efectoEscritura { to { clip-path: inset(0 0 0 0); } }
 
-        /* 2. SLIDESHOW */
+        .firma-quinceanera {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            color: var(--rosa-fuerte);
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInFirma 1.5s ease-out 3.5s forwards;
+        }
+        @keyframes fadeInFirma { to { opacity: 1; } }
+
+        /* 2. SLIDESHOW CON NOMBRE COMPLETO */
         .contenedor-fotos {
             position: relative;
             width: 80vw;
@@ -151,50 +162,88 @@
 
         .nombre-quince {
             font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(2rem, 8vw, 3rem);
+            font-size: clamp(1.6rem, 6.5vw, 2.5rem);
             color: var(--rosa-fuerte);
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-shadow: 2px 2px 0px white;
+            max-width: 90%;
+            line-height: 1.3;
         }
 
-        /* 3. PERGAMINO */
+        /* 3. PERGAMINO CON MOVIMIENTO EN BUCLE E INTERACTIVO */
         .pergamino-img {
             width: 90%;
             max-width: 450px;
             opacity: 0;
             transform: translateY(30px);
-            transition: all 1.2s ease-out;
+            transition: opacity 1.2s ease-out, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.5s;
+            /* Sombra realista que sigue los bordes del pergamino */
+            filter: drop-shadow(0 15px 12px rgba(0,0,0,0.25)); 
+            cursor: pointer;
         }
-        .pergamino-img.visible { opacity: 1; transform: translateY(0); }
+        
+        .pergamino-img.visible {
+            opacity: 1;
+            transform: translateY(0);
+            /* Lanza la animación sutil flotante una vez que aparece */
+            animation: flotarPergaminoBucle 4s ease-in-out infinite alternate;
+        }
 
-        /* 4. CALENDARIO */
+        .pergamino-img.visible:active, .pergamino-img.visible:hover {
+            transform: scale(1.06) !important;
+            filter: drop-shadow(0 25px 18px rgba(0,0,0,0.3));
+        }
+
+        @keyframes flotarPergaminoBucle {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(0.5deg); }
+            100% { transform: translateY(0) rotate(-0.5deg); }
+        }
+
+        /* 4. CALENDARIO CON LÍNEAS DIVISORIAS */
         .seccion-calendario {
             background-color: var(--rosa-fuerte);
             background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
             color: white;
             width: 100%;
             padding: 60px 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        .calendario { width: 95%; max-width: 350px; margin: 0 auto; }
+        .cal-header {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            letter-spacing: 4px;
+        }
+
+        .calendario { 
+            width: 100%; 
+            max-width: 340px; 
+            margin: 0 auto; 
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
 
         .dias-num {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 12px 0;
-            justify-items: center;
-            align-items: center;
+            gap: 0; /* Gaps eliminados para colapsar las líneas divisorias */
         }
 
         .num {
-            font-size: 1.1rem;
-            width: 38px;
-            height: 38px;
+            font-size: 1.05rem;
+            aspect-ratio: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            /* Líneas divisorias minimalistas y limpias */
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            margin: -0.5px;
         }
 
         .corazon-dibujo {
@@ -202,14 +251,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
+            width: 46px;
+            height: 46px;
             fill: none;
             stroke: white;
             stroke-width: 2.5;
             stroke-dasharray: 200;
             stroke-dashoffset: 200;
             animation: dibujarCorazon 3.5s linear infinite;
+            z-index: 5;
         }
 
         @keyframes dibujarCorazon {
@@ -218,14 +268,14 @@
             100% { stroke-dashoffset: -200; opacity: 0; }
         }
 
-        /* 5. FRASE BÍBLICA (CORREGIDA PARA TOTAL VISIBILIDAD) */
+        /* 5. FRASE BÍBLICA */
         .seccion-frase-biblica {
             background-image: url('FondoText.png');
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
             width: 100%;
-            padding: 140px 20px; /* Espacio extra arriba y abajo */
+            padding: 130px 20px;
             text-align: center;
         }
 
@@ -249,7 +299,7 @@
             padding-left: 0.9em;
         }
 
-        /* 6. CONTADOR Y TEXTO EN UNA LINEA */
+        /* 6. CONTADOR CON TEXTO SEGURO PROTEGIDO */
         .contenedor-blanco-contador {
             background: rgba(255, 255, 255, 0.85);
             width: 90%;
@@ -268,18 +318,19 @@
         .cuenta-regresiva-texto {
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 0.9em;
-            font-size: clamp(0.55rem, 2.5vw, 0.75rem);
+            /* Escalado dinámico ultraseguro para evitar saltos de línea */
+            font-size: clamp(9px, 2.3vw, 12px); 
+            letter-spacing: 0.65em;
             font-weight: 600;
             color: var(--texto);
             margin-top: 25px;
-            white-space: nowrap; /* Fuerza a salir en una sola línea */
+            white-space: nowrap;
             text-align: center;
             width: 100%;
-            padding-left: 0.9em;
+            padding-left: 0.65em;
         }
 
-        /* 7. GALERIA CON INDICADOR INTERACTIVO */
+        /* 7. GALERIA */
         .indicador-scroll {
             font-size: 0.7rem;
             text-transform: uppercase;
@@ -339,10 +390,10 @@
             box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
         }
 
-        /* --- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL (RSVP + DESPEDIDA) --- */
+        /* --- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL --- */
         .bloque-final-gala {
             background-color: var(--rosa-fuerte);
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* Misma textura del calendario */
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
             color: white;
             width: 100%;
             padding: 70px 15px;
@@ -368,6 +419,7 @@
             width: 100%; padding: 14px; margin-bottom: 15px;
             border: 1px solid #e0e0e0; border-radius: 10px;
             font-family: inherit; font-size: 0.9rem; text-align: center; outline: none;
+            color: var(--texto);
         }
         .control-form:focus { border-color: var(--rosa-fuerte); }
 
@@ -430,6 +482,7 @@
         <p class="frase-intro">
             Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida.
         </p>
+        <div class="firma-quinceanera">— Elizabeth García Huchín</div>
     </div>
 
     <div class="separador-plata"></div>
@@ -443,7 +496,7 @@
             <img src="Galfoto4.png" class="slide">
             <img src="Galfoto5.png" class="slide">
         </div>
-        <h1 class="nombre-quince">Elizabeth García</h1>
+        <h1 class="nombre-quince">Elizabeth García Huchín</h1>
     </section>
 
     <div class="separador-plata"></div>
@@ -457,7 +510,7 @@
 
     <!-- 4. CALENDARIO -->
     <div class="seccion-calendario">
-        <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 25px; letter-spacing: 4px; text-align: center;">Guarda la fecha</h2>
+        <h2 class="cal-header">Mayo 2026</h2>
         <div class="calendario">
             <div class="dias-num">
                 <span></span><span></span><span></span><span></span><span></span>
@@ -541,7 +594,7 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL (RSVP + DESPEDIDA CRISTIANA) -->
+    <!-- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL -->
     <div class="bloque-final-gala">
         <h2 class="titulo-rsvp">¡Acompáñame!</h2>
         <p style="font-size: 0.95rem; max-width: 320px; opacity: 0.9;">Tu presencia es muy importante, por favor confirma en el siguiente formulario</p>
@@ -560,14 +613,14 @@
         <span style="font-family: 'Montserrat'; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; font-size: 0.9rem;">¡Te esperamos!</span>
     </div>
 
-    <!-- 11. FOTO FINAL PANTALLA COMPLETA CORRECTA -->
+    <!-- 11. FOTO FINAL -->
     <div class="contenedor-foto-final">
         <img src="fotofinal.png">
         <div class="degradado-overlay"></div>
     </div>
 
     <script>
-        // Audio Control
+        // Lógica de Audio
         const track = document.getElementById('background-track');
         const iconoNota = document.getElementById('icono-nota');
         let sonando = false;
@@ -593,7 +646,7 @@
             slides[currentSlide].classList.add('active');
         }, 4000);
 
-        // Scroll Reveal
+        // Scroll Reveal interactivo
         const pergamino = document.getElementById('pergamino');
         window.addEventListener('scroll', () => {
             const pos = pergamino.getBoundingClientRect().top;
