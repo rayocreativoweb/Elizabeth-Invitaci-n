@@ -9,7 +9,6 @@
         :root {
             --rosa-pastel: #fce4ec;
             --rosa-fuerte: #d81b60;
-            --plata: #c0c0c0;
             --texto: #4e342e;
         }
 
@@ -27,39 +26,43 @@
         }
 
         section {
-            padding: 60px 20px;
+            padding: 40px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            width: 100%;
         }
 
         /* 1. FRASE INICIAL */
         .frase-intro {
             font-family: 'Pinyon Script', cursive;
-            font-size: 1.8rem;
+            font-size: clamp(1.5rem, 6vw, 2.2rem);
             line-height: 1.4;
             color: var(--texto);
-            max-width: 320px;
-            margin-bottom: 20px;
+            max-width: 90%;
+            margin: 20px 0;
         }
 
-        /* 2. SLIDESHOW Y NOMBRE */
+        /* 2. SLIDESHOW Y NOMBRE (ADAPTABLE) */
         .contenedor-fotos {
             position: relative;
-            width: 260px;
-            height: 380px;
-            margin-bottom: 20px;
+            width: 80vw; /* 80% del ancho de la pantalla */
+            max-width: 300px; /* No crecerá más de esto en pantallas grandes */
+            aspect-ratio: 2 / 3; /* Mantiene la proporción de la foto */
+            margin-bottom: 25px;
         }
 
         .slide {
             position: absolute;
             inset: 0;
+            width: 100%;
+            height: 100%;
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            border: 8px solid white;
-            border-radius: 130px 130px 0 0; /* Estilo Foto1.png */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 6px solid white;
+            border-radius: 120px 120px 0 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             object-fit: cover;
         }
 
@@ -67,44 +70,43 @@
 
         .nombre-quince {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 8vw, 3rem);
             color: var(--rosa-fuerte);
-            letter-spacing: 2px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
             text-shadow: 2px 2px 0px white;
         }
 
         /* 3. PERGAMINO */
         .pergamino-img {
-            width: 100%;
-            max-width: 500px;
+            width: 90%;
+            max-width: 450px;
+            height: auto;
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(30px);
             transition: all 1.2s ease-out;
         }
-        .pergamino-img.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .pergamino-img.visible { opacity: 1; transform: translateY(0); }
 
         /* 4. CALENDARIO GIGANTE */
         .seccion-calendario {
             background-color: var(--rosa-fuerte);
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* Textura papel */
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
             color: white;
             width: 100%;
-            padding: 80px 20px;
+            padding: 60px 10px;
         }
 
         .cal-header {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 1.5rem;
-            margin-bottom: 30px;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
             letter-spacing: 4px;
         }
 
         .calendario {
-            width: 100%;
-            max-width: 400px;
+            width: 95%;
+            max-width: 350px;
             margin: 0 auto;
         }
 
@@ -112,21 +114,21 @@
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             font-weight: bold;
-            margin-bottom: 10px;
-            opacity: 0.8;
-            font-size: 0.8rem;
+            margin-bottom: 15px;
+            font-size: 0.7rem;
         }
 
         .dias-num {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 15px 5px;
+            gap: 10px 0;
         }
 
         .num {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             padding: 10px 0;
             position: relative;
+            z-index: 1;
         }
 
         /* CORAZÓN ANIMADO */
@@ -135,81 +137,82 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
+            width: 45px;
+            height: 45px;
             fill: none;
             stroke: white;
-            stroke-width: 2;
-            stroke-linecap: round;
+            stroke-width: 2.5;
             stroke-dasharray: 200;
             stroke-dashoffset: 200;
-            animation: dibujarCorazon 3s linear infinite;
+            animation: dibujarCorazon 3.5s linear infinite;
+            z-index: -1;
         }
 
         @keyframes dibujarCorazon {
             0% { stroke-dashoffset: 200; opacity: 0; }
-            50% { stroke-dashoffset: 0; opacity: 1; }
+            40% { stroke-dashoffset: 0; opacity: 1; }
+            80% { opacity: 1; }
             100% { stroke-dashoffset: -200; opacity: 0; }
         }
 
         /* 5. FRASE CRISTIANA */
         .frase-quince {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.2rem;
+            font-size: clamp(1.8rem, 7vw, 2.5rem);
             color: var(--rosa-fuerte);
-            padding: 40px 20px;
-            line-height: 1.2;
+            padding: 30px 15px;
+            max-width: 90%;
         }
 
-        /* 6. CONTADOR */
-        .seccion-contador {
-            background: rgba(255, 255, 255, 0.9);
+        /* 6. CONTADOR PRO */
+        .contenedor-blanco-contador {
+            background: rgba(255, 255, 255, 0.85);
             width: 90%;
-            max-width: 500px;
-            border-radius: 20px;
-            padding: 40px 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 15px;
+            padding: 30px 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            border: 1px solid white;
         }
 
         .grid-contador {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            width: 100%;
         }
 
-        .bloque {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        .bloque { border-right: 1px solid rgba(216, 27, 96, 0.2); }
+        .bloque:last-child { border-right: none; }
 
         .cifra {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--rosa-fuerte);
+            display: block;
         }
 
         .etiqueta {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            color: #888;
         }
 
-        /* 7. GALERIA */
+        /* 7. GALERIA SCROLLER */
         .galeria-scroller {
             display: flex;
             overflow-x: auto;
             gap: 15px;
-            padding: 20px;
+            padding: 20px 10px;
             width: 100vw;
             scrollbar-width: none;
         }
-        .galeria-scroller::-webkit-scrollbar { display: none; }
         .galeria-scroller img {
-            height: 300px;
+            height: 250px;
+            width: auto;
             border-radius: 10px;
-            border: 5px solid white;
+            border: 4px solid white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             flex-shrink: 0;
         }
@@ -218,14 +221,12 @@
 </head>
 <body>
 
-    <!-- 1. FRASE INICIAL -->
     <section>
         <p class="frase-intro">
             Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida.
         </p>
     </section>
 
-    <!-- 2. SLIDESHOW Y NOMBRE -->
     <section>
         <div class="contenedor-fotos">
             <img src="Galfoto1.png" class="slide active">
@@ -237,12 +238,10 @@
         <h1 class="nombre-quince">Elizabeth García</h1>
     </section>
 
-    <!-- 3. PERGAMINO -->
     <section>
         <img src="pergamino.png" class="pergamino-img" id="pergamino">
     </section>
 
-    <!-- 4. CALENDARIO -->
     <div class="seccion-calendario">
         <h2 class="cal-header">Guarda la fecha</h2>
         <div class="calendario">
@@ -250,12 +249,10 @@
                 <span>DOM</span><span>LUN</span><span>MAR</span><span>MIE</span><span>JUE</span><span>VIE</span><span>SAB</span>
             </div>
             <div class="dias-num">
-                <!-- Mayo 2026 empieza en viernes -->
                 <span></span><span></span><span></span><span></span><span></span>
                 <span class="num">1</span><span class="num">2</span><span class="num">3</span><span class="num">4</span><span class="num">5</span><span class="num">6</span><span class="num">7</span><span class="num">8</span><span class="num">9</span><span class="num">10</span><span class="num">11</span><span class="num">12</span><span class="num">13</span><span class="num">14</span><span class="num">15</span><span class="num">16</span><span class="num">17</span><span class="num">18</span><span class="num">19</span><span class="num">20</span><span class="num">21</span><span class="num">22</span><span class="num">23</span><span class="num">24</span><span class="num">25</span><span class="num">26</span><span class="num">27</span><span class="num">28</span><span class="num">29</span>
                 <span class="num">
                     30
-                    <!-- SVG de Corazón Animado -->
                     <svg class="corazon-dibujo" viewBox="0 0 50 50">
                         <path d="M25 39.7l-.6-.5C11.5 28.7 8 25 8 19c0-5 4-9 9-9 4.1 0 6.4 2.3 8 4.1 1.6-1.8 3.9-4.1 8-4.1 5 0 9 4 9 9 0 6-3.5 9.7-16.4 20.2l-.6.5z"/>
                     </svg>
@@ -265,26 +262,26 @@
         </div>
     </div>
 
-    <!-- 5. FRASE CRISTIANA -->
     <section>
         <p class="frase-quince">
-            "Este es el día que hizo el Señor; nos gozaremos y alegraremos en él."
+            "Pongo mi vida en manos del Señor, confío en Él y Él actuará." <br>
+            <small style="font-size: 1rem; font-family: 'Montserrat';">Salmos 37:5</small>
         </p>
     </section>
 
-    <!-- 6. CONTADOR -->
-    <div class="seccion-contador">
-        <div class="grid-contador">
-            <div class="bloque"><span class="cifra" id="d">00</span><span class="etiqueta">Días</span></div>
-            <div class="bloque"><span class="cifra" id="h">00</span><span class="etiqueta">Horas</span></div>
-            <div class="bloque"><span class="cifra" id="m">00</span><span class="etiqueta">Min</span></div>
-            <div class="bloque"><span class="cifra" id="s">00</span><span class="etiqueta">Seg</span></div>
-        </div>
-    </div>
-
-    <!-- 7. GALERIA -->
     <section>
-        <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 10px;">Mis Recuerdos</h2>
+        <div class="contenedor-blanco-contador">
+            <div class="grid-contador">
+                <div class="bloque"><span class="cifra" id="d">00</span><span class="etiqueta">Días</span></div>
+                <div class="bloque"><span class="cifra" id="h">00</span><span class="etiqueta">Hrs</span></div>
+                <div class="bloque"><span class="cifra" id="m">00</span><span class="etiqueta">Min</span></div>
+                <div class="bloque"><span class="cifra" id="s">00</span><span class="etiqueta">Seg</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 5px; font-size: 1.2rem;">Galería de Recuerdos</h2>
         <div class="galeria-scroller">
             <img src="Galfoto1.png">
             <img src="Galfoto2.png">
@@ -295,7 +292,7 @@
     </section>
 
     <script>
-        // Slideshow
+        // Slideshow automático 4s
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         setInterval(() => {
@@ -308,22 +305,23 @@
         const pergamino = document.getElementById('pergamino');
         window.addEventListener('scroll', () => {
             const pos = pergamino.getBoundingClientRect().top;
-            if(pos < window.innerHeight - 100) {
+            if(pos < window.innerHeight - 80) {
                 pergamino.classList.add('visible');
             }
         });
 
-        // Contador 30 de Mayo
+        // Contador regresivo al 30 de Mayo 2026
         const fecha = new Date('May 30, 2026 15:30:00').getTime();
         setInterval(() => {
             const ahora = new Date().getTime();
             const d = fecha - ahora;
-            document.getElementById('d').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-            document.getElementById('h').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('m').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('s').innerText = Math.floor((d % (1000 * 60)) / 1000);
+            if (d > 0) {
+                document.getElementById('d').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+                document.getElementById('h').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('m').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('s').innerText = Math.floor((d % (1000 * 60)) / 1000);
+            }
         }, 1000);
     </script>
-
 </body>
 </html>
