@@ -3,279 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>XV Años - Elizabeth García Huchin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>XV Elizabeth García</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --rosa-fuerte: #f06292; 
-            --rosa-claro: #fce4ec;
-            --oro: #d4af37;
-            --crema: #fff9f0;
+        :root {
+            --rosa-pastel: #fce4ec;
+            --rosa-fuerte: #d81b60;
+            --plata: #c0c0c0;
+            --texto: #4e342e;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             font-family: 'Montserrat', sans-serif; 
-            background-color: var(--rosa-claro);
-            /* Tu imagen larga que se mueve con el scroll */
+            color: var(--texto);
             background-image: url('FondoPro.png');
             background-size: 100% auto;
             background-attachment: scroll;
             background-repeat: repeat-y;
+            background-color: var(--rosa-pastel);
             overflow-x: hidden;
         }
 
-        /* --- CINE-ENTRADA: EL SOBRE 3D --- */
-        #pantalla-apertura {
-            position: fixed;
-            inset: 0;
-            z-index: 9000;
-            background: var(--rosa-claro);
+        section {
+            padding: 60px 20px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            transition: opacity 1s ease;
+            text-align: center;
         }
 
-        .texto-sup { text-align: center; padding: 20px; font-style: italic; font-size: 0.9rem; max-width: 300px; margin-bottom: 20px; }
-
-        .envelope-wrapper { position: relative; width: 300px; height: 200px; perspective: 1000px; cursor: pointer; }
-        
-        .envelope-back { position: absolute; width: 100%; height: 100%; background: var(--crema); border: 1px solid #e0d0b0; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        
-        .envelope-flap { 
-            position: absolute; top: 0; width: 100%; height: 100%; 
-            background: var(--crema); border: 1px solid #e0d0b0;
-            clip-path: polygon(0 0, 50% 55%, 100% 0); 
-            z-index: 4; transform-origin: top; transition: 0.8s; 
+        /* 1. FRASE INICIAL */
+        .frase-intro {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 1.8rem;
+            line-height: 1.4;
+            color: var(--texto);
+            max-width: 320px;
+            margin-bottom: 20px;
         }
 
-        .polaroid-inside {
-            position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
-            width: 130px; background: white; padding: 10px 10px 25px 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 2; opacity: 0;
-            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
-        }
-        .polaroid-inside img { width: 100%; height: 130px; object-fit: cover; }
-
-        .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
-        .envelope-wrapper.open .polaroid-inside { transform: translate(-50%, -110%) rotate(-5deg); opacity: 1; }
-
-        .btn-redondo {
-            position: absolute; right: -20px; bottom: -20px; width: 80px; height: 80px;
-            background: var(--rosa-fuerte); color: white; border-radius: 50%; border: 4px solid white;
-            font-size: 0.65rem; font-weight: bold; text-transform: uppercase;
-            display: flex; justify-content: center; align-items: center; text-align: center;
-            z-index: 10; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s;
+        /* 2. SLIDESHOW Y NOMBRE */
+        .contenedor-fotos {
+            position: relative;
+            width: 260px;
+            height: 380px;
+            margin-bottom: 20px;
         }
 
-        /* --- CONTENIDO DE LA INVITACIÓN --- */
-        #video-fondo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; display: none; opacity: 0.6; }
-        #capa-estrellas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        .star { position: absolute; background: white; border-radius: 50%; animation: blink var(--d) infinite; opacity: 0; }
-        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 0.8; } }
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            border: 8px solid white;
+            border-radius: 130px 130px 0 0; /* Estilo Foto1.png */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
 
-        section { min-height: 80vh; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .slide.active { opacity: 1; }
 
-        /* Efecto Cristal */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px 20px;
+        .nombre-quince {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.5rem;
+            color: var(--rosa-fuerte);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px white;
+        }
+
+        /* 3. PERGAMINO */
+        .pergamino-img {
             width: 100%;
-            max-width: 350px;
-            border: 1px solid rgba(255,255,255,0.4);
+            max-width: 500px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.2s ease-out;
+        }
+        .pergamino-img.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 4. CALENDARIO GIGANTE */
+        .seccion-calendario {
+            background-color: var(--rosa-fuerte);
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* Textura papel */
+            color: white;
+            width: 100%;
+            padding: 80px 20px;
+        }
+
+        .cal-header {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+        }
+
+        .calendario {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .dias-letras {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            font-weight: bold;
+            margin-bottom: 10px;
+            opacity: 0.8;
+            font-size: 0.8rem;
+        }
+
+        .dias-num {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 15px 5px;
+        }
+
+        .num {
+            font-size: 1.2rem;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        /* CORAZÓN ANIMADO */
+        .corazon-dibujo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: dibujarCorazon 3s linear infinite;
+        }
+
+        @keyframes dibujarCorazon {
+            0% { stroke-dashoffset: 200; opacity: 0; }
+            50% { stroke-dashoffset: 0; opacity: 1; }
+            100% { stroke-dashoffset: -200; opacity: 0; }
+        }
+
+        /* 5. FRASE CRISTIANA */
+        .frase-quince {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: var(--rosa-fuerte);
+            padding: 40px 20px;
+            line-height: 1.2;
+        }
+
+        /* 6. CONTADOR */
+        .seccion-contador {
+            background: rgba(255, 255, 255, 0.9);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 40px 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin: 20px auto;
         }
 
-        .foto-perfil { width: 250px; border: 8px solid white; border-radius: 125px 125px 0 0; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .nombre-quince { font-family: 'Great Vibes', cursive; font-size: clamp(4rem, 15vw, 5.5rem); color: var(--rosa-fuerte); margin: 10px 0; }
-
-        .pergamino-final { width: 100%; max-width: 500px; margin: 20px 0; }
-
-        /* Calendario Pro */
-        .cal-box { width: 100%; max-width: 300px; background: white; border-radius: 15px; padding: 15px; border: 1px solid var(--rosa-fuerte); }
-        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; font-size: 0.8rem; }
-        .cal-especial { color: var(--rosa-fuerte); font-weight: bold; position: relative; }
-        .corona-svg { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); color: var(--oro); font-size: 1.2rem; }
-
-        .timer-grid { display: flex; gap: 10px; margin-top: 20px; }
-        .t-box { background: white; padding: 10px; border-radius: 10px; min-width: 70px; border-bottom: 3px solid var(--rosa-fuerte); }
-        .t-box span { font-weight: bold; font-size: 1.5rem; color: var(--rosa-fuerte); display: block; }
-
-        .scroller-galeria { display: flex; overflow-x: auto; gap: 15px; padding: 20px; width: 100vw; scrollbar-width: none; }
-        .scroller-galeria img { height: 320px; border-radius: 15px; border: 5px solid white; flex-shrink: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-
-        .btn-lujo { 
-            padding: 15px 30px; background: white; border: 1px solid var(--rosa-fuerte); border-radius: 50px; 
-            color: var(--rosa-fuerte); font-weight: bold; text-decoration: none; margin-top: 15px; display: inline-block;
+        .grid-contador {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
 
-        /* Animaciones */
-        .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .active { opacity: 1; transform: translateY(0); }
+        .bloque {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cifra {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--rosa-fuerte);
+        }
+
+        .etiqueta {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* 7. GALERIA */
+        .galeria-scroller {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 20px;
+            width: 100vw;
+            scrollbar-width: none;
+        }
+        .galeria-scroller::-webkit-scrollbar { display: none; }
+        .galeria-scroller img {
+            height: 300px;
+            border-radius: 10px;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
 
     </style>
 </head>
 <body>
 
-    <!-- VIDEO Y EFECTOS -->
-    <video id="video-fondo" loop muted playsinline><source src="FondoVideo.mp4" type="video/mp4"></video>
-    <div id="capa-estrellas"></div>
+    <!-- 1. FRASE INICIAL -->
+    <section>
+        <p class="frase-intro">
+            Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida.
+        </p>
+    </section>
 
-    <!-- PANTALLA INICIAL -->
-    <div id="pantalla-apertura">
-        <p class="texto-sup">"Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida."</p>
-        
-        <div class="envelope-wrapper" id="sobre" onclick="abrirTodo()">
-            <div class="envelope-flap"></div>
-            <div class="envelope-back"></div>
-            <div class="polaroid-inside">
-                <img src="Foto1.png" alt="Elizabeth">
-            </div>
-            <div class="btn-redondo">Más<br>Detalles</div>
+    <!-- 2. SLIDESHOW Y NOMBRE -->
+    <section>
+        <div class="contenedor-fotos">
+            <img src="Galfoto1.png" class="slide active">
+            <img src="Galfoto2.png" class="slide">
+            <img src="Galfoto3.png" class="slide">
+            <img src="Galfoto4.png" class="slide">
+            <img src="Galfoto5.png" class="slide">
         </div>
+        <h1 class="nombre-quince">Elizabeth García</h1>
+    </section>
 
-        <h2 style="font-family: 'Cinzel Decorative'; color: var(--rosa-fuerte); margin-top: 30px; letter-spacing: 3px;">Elizabeth García</h2>
-        <p style="font-size: 0.6rem; margin-top: 20px; letter-spacing: 2px; opacity: 0.6;">POR FAVOR ACTIVA EL SONIDO</p>
+    <!-- 3. PERGAMINO -->
+    <section>
+        <img src="pergamino.png" class="pergamino-img" id="pergamino">
+    </section>
+
+    <!-- 4. CALENDARIO -->
+    <div class="seccion-calendario">
+        <h2 class="cal-header">Guarda la fecha</h2>
+        <div class="calendario">
+            <div class="dias-letras">
+                <span>DOM</span><span>LUN</span><span>MAR</span><span>MIE</span><span>JUE</span><span>VIE</span><span>SAB</span>
+            </div>
+            <div class="dias-num">
+                <!-- Mayo 2026 empieza en viernes -->
+                <span></span><span></span><span></span><span></span><span></span>
+                <span class="num">1</span><span class="num">2</span><span class="num">3</span><span class="num">4</span><span class="num">5</span><span class="num">6</span><span class="num">7</span><span class="num">8</span><span class="num">9</span><span class="num">10</span><span class="num">11</span><span class="num">12</span><span class="num">13</span><span class="num">14</span><span class="num">15</span><span class="num">16</span><span class="num">17</span><span class="num">18</span><span class="num">19</span><span class="num">20</span><span class="num">21</span><span class="num">22</span><span class="num">23</span><span class="num">24</span><span class="num">25</span><span class="num">26</span><span class="num">27</span><span class="num">28</span><span class="num">29</span>
+                <span class="num">
+                    30
+                    <!-- SVG de Corazón Animado -->
+                    <svg class="corazon-dibujo" viewBox="0 0 50 50">
+                        <path d="M25 39.7l-.6-.5C11.5 28.7 8 25 8 19c0-5 4-9 9-9 4.1 0 6.4 2.3 8 4.1 1.6-1.8 3.9-4.1 8-4.1 5 0 9 4 9 9 0 6-3.5 9.7-16.4 20.2l-.6.5z"/>
+                    </svg>
+                </span>
+                <span class="num">31</span>
+            </div>
+        </div>
     </div>
 
-    <audio id="musica" src="musica.mp3" loop></audio>
+    <!-- 5. FRASE CRISTIANA -->
+    <section>
+        <p class="frase-quince">
+            "Este es el día que hizo el Señor; nos gozaremos y alegraremos en él."
+        </p>
+    </section>
 
-    <!-- INVITACIÓN -->
-    <main id="app" style="display:none">
-        
-        <section>
-            <img src="Foto1.png" class="foto-perfil reveal">
-            <h1 class="nombre-quince reveal">Elizabeth</h1>
-            <p class="reveal" style="letter-spacing: 8px; font-weight: 300; text-shadow: 1px 1px 2px #fff;">MIS XV AÑOS</p>
-        </section>
+    <!-- 6. CONTADOR -->
+    <div class="seccion-contador">
+        <div class="grid-contador">
+            <div class="bloque"><span class="cifra" id="d">00</span><span class="etiqueta">Días</span></div>
+            <div class="bloque"><span class="cifra" id="h">00</span><span class="etiqueta">Horas</span></div>
+            <div class="bloque"><span class="cifra" id="m">00</span><span class="etiqueta">Min</span></div>
+            <div class="bloque"><span class="cifra" id="s">00</span><span class="etiqueta">Seg</span></div>
+        </div>
+    </div>
 
-        <section>
-            <img src="pergamino.png" class="pergamino-final reveal">
-        </section>
-
-        <section>
-            <div class="glass-card reveal">
-                <p style="margin-bottom: 15px; font-weight: 600; letter-spacing: 2px;">MAYO 2026</p>
-                <div class="cal-box">
-                    <div class="cal-grid" style="color: #999; margin-bottom: 10px; font-weight: bold;">
-                        <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
-                    </div>
-                    <div class="cal-grid">
-                        <span></span><span></span><span></span><span></span><span></span><span>1</span><span>2</span>
-                        <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
-                        <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
-                        <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
-                        <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span>
-                        <span class="cal-especial"><i class="fa-solid fa-crown corona-svg"></i>30</span>
-                        <span>31</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <p class="reveal" style="margin-bottom: 10px; font-size: 0.9rem;">"La cuenta regresiva ha comenzado"</p>
-            <div class="timer-grid reveal">
-                <div class="t-box"><span id="d">00</span><small>Días</small></div>
-                <div class="t-box"><span id="h">00</span><small>Hrs</small></div>
-                <div class="t-box"><span id="m">00</span><small>Min</small></div>
-                <div class="t-box"><span id="s">00</span><small>Seg</small></div>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="reveal" style="font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--rosa-fuerte);">Galería</h2>
-            <div class="scroller-galeria reveal">
-                <img src="Galfoto1.png"><img src="Galfoto2.png"><img src="Galfoto3.png"><img src="Galfoto4.png"><img src="Galfoto5.png">
-            </div>
-        </section>
-
-        <section>
-            <div class="glass-card reveal" style="margin-bottom: 20px;">
-                <h3 style="font-family: 'Cinzel Decorative'; color: var(--rosa-fuerte);">Ceremonia de Acción de Gracias</h3>
-                <p>3:30 PM | Templo Jordán</p>
-                <a href="#" class="btn-lujo">📍 Ubicación</a>
-            </div>
-            <div class="glass-card reveal">
-                <h3 style="font-family: 'Cinzel Decorative'; color: var(--rosa-fuerte);">Recepción Social</h3>
-                <p>6:00 PM | Poliforum</p>
-                <a href="#" class="btn-lujo">📍 Mapa</a>
-            </div>
-        </section>
-
-        <section>
-            <div class="glass-card reveal">
-                <h3 style="font-family: 'Cinzel Decorative'; margin-bottom: 20px;">Confirmar Asistencia</h3>
-                <input type="text" placeholder="TU NOMBRE" style="width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px; text-align: center;">
-                <a href="https://wa.me/0000000000" class="btn-lujo" style="background: #25d366; color: white; border: none; width: 100%;">WhatsApp</a>
-            </div>
-            <img src="fotofinal.png" class="reveal" style="width: 250px; border-radius: 15px; border: 5px solid white; margin-top: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-        </section>
-
-    </main>
+    <!-- 7. GALERIA -->
+    <section>
+        <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 10px;">Mis Recuerdos</h2>
+        <div class="galeria-scroller">
+            <img src="Galfoto1.png">
+            <img src="Galfoto2.png">
+            <img src="Galfoto3.png">
+            <img src="Galfoto4.png">
+            <img src="Galfoto5.png">
+        </div>
+    </section>
 
     <script>
-        function abrirTodo() {
-            const sobre = document.getElementById('sobre');
-            const apertura = document.getElementById('pantalla-apertura');
-            const musica = document.getElementById('track');
-            const video = document.getElementById('video-fondo');
-            const app = document.getElementById('app');
+        // Slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 4000);
 
-            sobre.classList.add('open');
-            musica.play();
-
-            setTimeout(() => {
-                apertura.style.opacity = '0';
-                video.style.display = 'block';
-                video.play();
-                setTimeout(() => {
-                    apertura.style.display = 'none';
-                    app.style.display = 'block';
-                    window.scrollTo(0,0);
-                    crearEstrellas();
-                    reveal();
-                }, 1000);
-            }, 2500);
-        }
-
-        function crearEstrellas() {
-            const container = document.getElementById('capa-estrellas');
-            for(let i=0; i<40; i++) {
-                const s = document.createElement('div');
-                s.className = 'star';
-                s.style.left = Math.random() * 100 + '%';
-                s.style.top = Math.random() * 100 + '%';
-                s.style.width = s.style.height = (Math.random() * 3 + 2) + 'px';
-                s.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
-                container.appendChild(s);
+        // Scroll Reveal para el Pergamino
+        const pergamino = document.getElementById('pergamino');
+        window.addEventListener('scroll', () => {
+            const pos = pergamino.getBoundingClientRect().top;
+            if(pos < window.innerHeight - 100) {
+                pergamino.classList.add('visible');
             }
-        }
+        });
 
-        const fechaEvento = new Date('May 30, 2026 15:30:00').getTime();
+        // Contador 30 de Mayo
+        const fecha = new Date('May 30, 2026 15:30:00').getTime();
         setInterval(() => {
             const ahora = new Date().getTime();
-            const d = fechaEvento - ahora;
+            const d = fecha - ahora;
             document.getElementById('d').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
             document.getElementById('h').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             document.getElementById('m').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
             document.getElementById('s').innerText = Math.floor((d % (1000 * 60)) / 1000);
         }, 1000);
-
-        function reveal() {
-            const items = document.querySelectorAll('.reveal');
-            items.forEach(i => {
-                if (i.getBoundingClientRect().top < window.innerHeight - 50) i.classList.add('active');
-            });
-        }
-        window.addEventListener('scroll', reveal);
     </script>
+
 </body>
 </html>
