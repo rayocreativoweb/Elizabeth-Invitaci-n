@@ -66,14 +66,8 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
-        .control-musica-fijo i {
-            color: var(--rosa-fuerte);
-            font-size: 1.3rem;
-        }
-
-        .pulsar-icono {
-            animation: pulsoIcono 2s infinite;
-        }
+        .control-musica-fijo i { color: var(--rosa-fuerte); font-size: 1.3rem; }
+        .pulsar-icono { animation: pulsoIcono 2s infinite; }
         @keyframes pulsoIcono {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); box-shadow: 0 4px 20px rgba(216, 27, 96, 0.4); }
@@ -94,10 +88,7 @@
         .separador-plata::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -150%;
-            width: 60%;
-            height: 100%;
+            top: 0; left: -150%; width: 60%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.85), transparent);
             animation: destelloMovimiento 3.5s infinite linear;
         }
@@ -108,13 +99,14 @@
             100% { left: 150%; }
         }
 
-        /* 1. SECCIÓN FRASE INICIAL */
+        /* 1. SECCIÓN FRASE INICIAL (CORREGIDA PARA TOTAL VISIBILIDAD) */
         .seccion-intro {
             background-image: url('FondoText.png');
-            background-size: cover;
+            background-size: 100% 100%;
             background-position: center;
+            background-repeat: no-repeat;
             width: 100%;
-            padding: 80px 20px;
+            padding: 140px 20px; /* Espacio extra arriba y abajo */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -131,9 +123,7 @@
             animation: efectoEscritura 4.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        @keyframes efectoEscritura {
-            to { clip-path: inset(0 0 0 0); }
-        }
+        @keyframes efectoEscritura { to { clip-path: inset(0 0 0 0); } }
 
         /* 2. SLIDESHOW */
         .contenedor-fotos {
@@ -228,13 +218,14 @@
             100% { stroke-dashoffset: -200; opacity: 0; }
         }
 
-        /* 5. FRASE BÍBLICA */
+        /* 5. FRASE BÍBLICA (CORREGIDA PARA TOTAL VISIBILIDAD) */
         .seccion-frase-biblica {
             background-image: url('FondoText.png');
-            background-size: cover;
+            background-size: 100% 100%;
             background-position: center;
+            background-repeat: no-repeat;
             width: 100%;
-            padding: 80px 20px;
+            padding: 140px 20px; /* Espacio extra arriba y abajo */
             text-align: center;
         }
 
@@ -258,7 +249,7 @@
             padding-left: 0.9em;
         }
 
-        /* 6. CONTADOR */
+        /* 6. CONTADOR Y TEXTO EN UNA LINEA */
         .contenedor-blanco-contador {
             background: rgba(255, 255, 255, 0.85);
             width: 90%;
@@ -274,15 +265,45 @@
         .cifra { font-family: 'Cinzel Decorative', serif; font-size: 1.6rem; font-weight: bold; color: var(--rosa-fuerte); }
         .etiqueta { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: #888; }
 
-        /* 7. GALERIA */
+        .cuenta-regresiva-texto {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.9em;
+            font-size: clamp(0.55rem, 2.5vw, 0.75rem);
+            font-weight: 600;
+            color: var(--texto);
+            margin-top: 25px;
+            white-space: nowrap; /* Fuerza a salir en una sola línea */
+            text-align: center;
+            width: 100%;
+            padding-left: 0.9em;
+        }
+
+        /* 7. GALERIA CON INDICADOR INTERACTIVO */
+        .indicador-scroll {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--texto);
+            margin-bottom: 8px;
+            opacity: 0.8;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .indicador-scroll i { animation: moverFlecha 1.5s infinite ease-in-out; }
+        @keyframes moverFlecha { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+
         .galeria-scroller {
             display: flex;
             overflow-x: auto;
             gap: 15px;
-            padding: 20px 10px;
+            padding: 10px 10px 20px 10px;
             width: 100vw;
             scrollbar-width: none;
         }
+        .galeria-scroller::-webkit-scrollbar { display: none; }
         .galeria-scroller img {
             height: 280px;
             border-radius: 15px;
@@ -298,25 +319,10 @@
             margin-bottom: 15px;
             animation: flotarEfecto 3s ease-in-out infinite;
         }
+        @keyframes flotarEfecto { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-        @keyframes flotarEfecto {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .titulo-gala {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(1.4rem, 6vw, 2rem);
-            color: var(--rosa-fuerte);
-            margin-bottom: 15px;
-        }
-
-        .datos-gala {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            max-width: 320px;
-        }
+        .titulo-gala { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.4rem, 6vw, 2rem); color: var(--rosa-fuerte); margin-bottom: 15px; }
+        .datos-gala { font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px; max-width: 320px; }
 
         .btn-rosa-plata {
             padding: 14px 30px;
@@ -331,75 +337,54 @@
             text-decoration: none;
             display: inline-block;
             box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
-            transition: 0.3s;
         }
-        .btn-rosa-plata:active { transform: scale(0.95); }
 
-        /* --- 9. FORMULARIO RSVP --- */
-        .seccion-rsvp {
-            background-color: #fff1f3;
-            background-image: url('https://www.transparenttextures.com/patterns/lined-paper.png'); /* Textura de líneas finas limpias */
+        /* --- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL (RSVP + DESPEDIDA) --- */
+        .bloque-final-gala {
+            background-color: var(--rosa-fuerte);
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* Misma textura del calendario */
+            color: white;
             width: 100%;
-            padding: 70px 20px;
+            padding: 70px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
         }
 
-        .titulo-rsvp {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            color: var(--rosa-fuerte);
-            margin-bottom: 10px;
-        }
-
+        .titulo-rsvp { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: white; margin-bottom: 10px; }
         .tarjeta-formulario {
             background: white;
             padding: 30px 20px;
             border-radius: 20px;
             width: 100%;
             max-width: 360px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid rgba(216, 27, 96, 0.1);
-            margin-top: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin: 25px 0 50px 0;
         }
 
         .control-form {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            text-align: center;
-            outline: none;
+            width: 100%; padding: 14px; margin-bottom: 15px;
+            border: 1px solid #e0e0e0; border-radius: 10px;
+            font-family: inherit; font-size: 0.9rem; text-align: center; outline: none;
         }
         .control-form:focus { border-color: var(--rosa-fuerte); }
 
         .btn-whatsapp-rsvp {
-            width: 100%;
-            padding: 15px;
-            background-color: #25d366;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.25);
+            width: 100%; padding: 15px; background-color: #25d366; color: white;
+            border: none; border-radius: 10px; font-weight: 600; font-size: 0.9rem;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+            display: flex; justify-content: center; align-items: center; gap: 10px;
         }
 
-        /* --- 10. CIERRE Y DESPEDIDA --- */
         .frase-despedida {
             font-family: 'Alex Brush', cursive;
-            font-size: 2.5rem;
-            color: var(--rosa-fuerte);
+            font-size: 2.6rem;
+            color: white;
             line-height: 1.4;
-            margin-bottom: 15px;
+            max-width: 340px;
+            margin-bottom: 25px;
         }
 
         /* --- 11. FOTO FINAL PANTALLA COMPLETA --- */
@@ -421,7 +406,7 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(to bottom, 
-                var(--rosa-pastel) 0%, 
+                var(--rosa-fuerte) 0%, 
                 transparent 15%, 
                 transparent 85%, 
                 var(--rosa-pastel) 100%);
@@ -432,7 +417,6 @@
 </head>
 <body>
 
-    <!-- ELEMENTOS DE AUDIO AUDIO -->
     <div class="aviso-sonido-superior">Por favor activa el sonido</div>
     
     <div class="control-musica-fijo pulsar-icono" onclick="controlarMusica()">
@@ -511,13 +495,14 @@
                 <div class="bloque"><span class="cifra" id="s">00</span><span class="etiqueta">Seg</span></div>
             </div>
         </div>
+        <div class="cuenta-regresiva-texto">La cuenta regresiva ya empezó</div>
     </section>
 
     <div class="separador-plata"></div>
 
     <!-- 7. GALERIA -->
     <section>
-        <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 15px; font-size: 1.3rem;">Mis Recuerdos</h2>
+        <div class="indicador-scroll">Mis Recuerdos &nbsp;|&nbsp; Desliza <i class="fas fa-arrow-right"></i></div>
         <div class="galeria-scroller">
             <img src="Galfoto1.png">
             <img src="Galfoto2.png">
@@ -548,8 +533,7 @@
         <div class="icono-animado" style="animation-delay: 0.5s;"><i class="fas fa-glass-cheers"></i></div>
         <h2 class="titulo-gala">Recepción Social</h2>
         <p class="datos-gala">
-            <strong>Poliforum</strong><br>
-            Escárcega, Camp.<br>
+            <strong>Poliforum Escárcega Camp.</strong><br>
             Hora: 6:00 PM
         </p>
         <a href="#" class="btn-rosa-plata">Ver mapa</a>
@@ -557,40 +541,33 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 9. FORMULARIO RSVP -->
-    <div class="seccion-rsvp">
+    <!-- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL (RSVP + DESPEDIDA CRISTIANA) -->
+    <div class="bloque-final-gala">
         <h2 class="titulo-rsvp">¡Acompáñame!</h2>
-        <p style="font-size: 0.95rem; max-width: 320px; margin: 0 auto;">Tu presencia es muy importante, por favor confirma en el siguiente formulario</p>
+        <p style="font-size: 0.95rem; max-width: 320px; opacity: 0.9;">Tu presencia es muy importante, por favor confirma en el siguiente formulario</p>
         
-        <center>
-            <div class="tarjeta-formulario">
-                <input type="text" class="control-form" placeholder="Nombre completo">
-                <select class="control-form">
-                    <option value="">¿Asistirás?</option>
-                    <option value="si">Sí, con gusto iré</option>
-                    <option value="no">Lo siento, no podré</option>
-                </select>
-                <button class="btn-whatsapp-rsvp"><i class="fab fa-whatsapp"></i> Confirmar Asistencia</button>
-            </div>
-        </center>
+        <div class="tarjeta-formulario">
+            <input type="text" class="control-form" placeholder="Nombre completo">
+            <select class="control-form">
+                <option value="">¿Asistirás?</option>
+                <option value="si">Sí, con gusto iré</option>
+                <option value="no">Lo siento, no podré</option>
+            </select>
+            <button class="btn-whatsapp-rsvp"><i class="fab fa-whatsapp"></i> Confirmar Asistencia</button>
+        </div>
+
+        <p class="frase-despedida">"Grandes cosas ha hecho el Señor con nosotros; y estamos alegres."</p>
+        <span style="font-family: 'Montserrat'; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; font-size: 0.9rem;">¡Te esperamos!</span>
     </div>
 
-    <div class="separador-plata"></div>
-
-    <!-- 10. CIERRE Y DESPEDIDA -->
-    <section style="background-color: white;">
-        <p class="frase-despedida">"Grandes cosas ha hecho el Señor con nosotros; y estamos alegres."</p>
-        <span style="font-family: 'Montserrat'; font-weight: 600; letter-spacing: 4px; color: var(--rosa-fuerte); text-transform: uppercase;">¡Te esperamos!</span>
-    </section>
-
-    <!-- 11. FOTO FINAL DEGRADADO COMPLETO -->
+    <!-- 11. FOTO FINAL PANTALLA COMPLETA CORRECTA -->
     <div class="contenedor-foto-final">
-        <img src="FotoFinal.png">
+        <img src="fotofinal.png">
         <div class="degradado-overlay"></div>
     </div>
 
     <script>
-        // Lógica de Audio
+        // Audio Control
         const track = document.getElementById('background-track');
         const iconoNota = document.getElementById('icono-nota');
         let sonando = false;
@@ -607,7 +584,7 @@
             }
         }
 
-        // Slideshow automático
+        // Slideshow
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         setInterval(() => {
@@ -616,7 +593,7 @@
             slides[currentSlide].classList.add('active');
         }, 4000);
 
-        // Scroll Reveal Pergamino
+        // Scroll Reveal
         const pergamino = document.getElementById('pergamino');
         window.addEventListener('scroll', () => {
             const pos = pergamino.getBoundingClientRect().top;
@@ -625,7 +602,7 @@
             }
         });
 
-        // Reloj
+        // Reloj Regresivo
         const fecha = new Date('May 30, 2026 15:30:00').getTime();
         setInterval(() => {
             const ahora = new Date().getTime();
