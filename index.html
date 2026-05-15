@@ -136,7 +136,7 @@
         }
         @keyframes fadeInFirma { to { opacity: 1; } }
 
-        /* 2. SLIDESHOW CON NOMBRE COMPLETO */
+        /* 2. SLIDESHOW */
         .contenedor-fotos {
             position: relative;
             width: 80vw;
@@ -171,28 +171,28 @@
             line-height: 1.3;
         }
 
-        /* 3. PERGAMINO CON MOVIMIENTO EN BUCLE E INTERACTIVO */
+        /* 3. PERGAMINO INTERACTIVO OPTIMIZADO */
         .pergamino-img {
             width: 90%;
             max-width: 450px;
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 1.2s ease-out, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.5s;
-            /* Sombra realista que sigue los bordes del pergamino */
-            filter: drop-shadow(0 15px 12px rgba(0,0,0,0.25)); 
+            transition: opacity 1.2s ease-out, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
+            /* Sombra resaltada más profunda y realista */
+            filter: drop-shadow(0 20px 16px rgba(0,0,0,0.35)); 
             cursor: pointer;
         }
         
         .pergamino-img.visible {
             opacity: 1;
             transform: translateY(0);
-            /* Lanza la animación sutil flotante una vez que aparece */
             animation: flotarPergaminoBucle 4s ease-in-out infinite alternate;
         }
 
+        /* Efecto de agrandado leve al presionar o pasar el cursor */
         .pergamino-img.visible:active, .pergamino-img.visible:hover {
-            transform: scale(1.06) !important;
-            filter: drop-shadow(0 25px 18px rgba(0,0,0,0.3));
+            transform: scale(1.05) !important;
+            filter: drop-shadow(0 28px 22px rgba(0,0,0,0.4));
         }
 
         @keyframes flotarPergaminoBucle {
@@ -201,49 +201,67 @@
             100% { transform: translateY(0) rotate(-0.5deg); }
         }
 
-        /* 4. CALENDARIO CON LÍNEAS DIVISORIAS */
+        /* 4. CALENDARIO SIN FONDO CON CUADRÍCULA COMPLETA */
         .seccion-calendario {
             background-color: var(--rosa-fuerte);
             background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
             color: white;
             width: 100%;
-            padding: 60px 10px;
+            padding: 60px 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         .cal-header {
             font-family: 'Cinzel Decorative', serif;
             font-size: 1.5rem;
-            margin-bottom: 25px;
+            margin-bottom: 5px;
             letter-spacing: 4px;
+            text-align: center;
+        }
+
+        .cal-mes-ano {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            opacity: 0.9;
         }
 
         .calendario { 
             width: 100%; 
-            max-width: 340px; 
+            max-width: 320px; 
             margin: 0 auto; 
-            border: 1px solid rgba(255,255,255,0.25);
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
+            background: transparent; /* Fondo eliminado */
         }
+
+        .dias-letras {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            opacity: 0.95;
+        }
+        .dias-letras span { padding-bottom: 5px; }
 
         .dias-num {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 0; /* Gaps eliminados para colapsar las líneas divisorias */
         }
 
-        .num {
-            font-size: 1.05rem;
+        /* Cuadrícula interna minimalista aplicada a todas las celdas */
+        .dias-num span, .dias-num .num {
             aspect-ratio: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            /* Líneas divisorias minimalistas y limpias */
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.22);
             margin: -0.5px;
+            font-size: 1.05rem;
         }
 
         .corazon-dibujo {
@@ -318,16 +336,16 @@
         .cuenta-regresiva-texto {
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            /* Escalado dinámico ultraseguro para evitar saltos de línea */
-            font-size: clamp(9px, 2.3vw, 12px); 
-            letter-spacing: 0.65em;
+            /* Escalado dinámico ultraconservador para blindar la línea única en pantallas micro */
+            font-size: clamp(7.5px, 2.1vw, 11px); 
+            letter-spacing: 0.6em;
             font-weight: 600;
             color: var(--texto);
             margin-top: 25px;
             white-space: nowrap;
             text-align: center;
             width: 100%;
-            padding-left: 0.65em;
+            padding-left: 0.6em;
         }
 
         /* 7. GALERIA */
@@ -508,11 +526,17 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 4. CALENDARIO -->
+    <!-- 4. CALENDARIO CON CUADRÍCULA TRANSPARENTE -->
     <div class="seccion-calendario">
-        <h2 class="cal-header">Mayo 2026</h2>
+        <h2 class="cal-header">Guarda la fecha</h2>
+        <div class="cal-mes-ano">Mayo 2026</div>
         <div class="calendario">
+            <!-- Iniciales de los días alineadas -->
+            <div class="dias-letras">
+                <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
+            </div>
             <div class="dias-num">
+                <!-- Celdas vacías con bordes integrados -->
                 <span></span><span></span><span></span><span></span><span></span>
                 <span class="num">1</span><span class="num">2</span><span class="num">3</span><span class="num">4</span><span class="num">5</span><span class="num">6</span><span class="num">7</span><span class="num">8</span><span class="num">9</span><span class="num">10</span><span class="num">11</span><span class="num">12</span><span class="num">13</span><span class="num">14</span><span class="num">15</span><span class="num">16</span><span class="num">17</span><span class="num">18</span><span class="num">19</span><span class="num">20</span><span class="num">21</span><span class="num">22</span><span class="num">23</span><span class="num">24</span><span class="num">25</span><span class="num">26</span><span class="num">27</span><span class="num">28</span><span class="num">29</span>
                 <span class="num">
