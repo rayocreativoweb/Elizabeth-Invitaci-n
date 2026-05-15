@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>XV Elizabeth García</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <!-- Agregada la fuente Alex Brush para una cursiva más legible y elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --rosa-pastel: #fce4ec;
             --rosa-fuerte: #d81b60;
             --texto: #4e342e;
+            --crema-papel: #fbf5e8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,22 +36,39 @@
             width: 100%;
         }
 
-        /* 1. FRASE INICIAL */
-        .frase-intro {
-            font-family: 'Pinyon Script', cursive;
-            font-size: clamp(1.5rem, 6vw, 2.2rem);
-            line-height: 1.4;
-            color: var(--texto);
-            max-width: 90%;
-            margin: 20px 0;
+        /* 1. SECCIÓN FRASE INICIAL CON TEXTURA Y ESCRITURA */
+        .seccion-intro {
+            background-color: var(--crema-papel);
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* Textura papel */
+            width: 100%;
+            padding: 60px 20px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* 2. SLIDESHOW Y NOMBRE (ADAPTABLE) */
+        .frase-intro {
+            font-family: 'Alex Brush', cursive;
+            font-size: clamp(1.8rem, 7vw, 2.5rem);
+            line-height: 1.5;
+            color: #2d1a17; /* Alto contraste */
+            max-width: 550px;
+            margin: 0 auto;
+            display: inline-block;
+            /* Animación de escritura fluida */
+            clip-path: inset(0 100% 0 0);
+            animation: efectoEscritura 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes efectoEscritura {
+            to { clip-path: inset(0 0 0 0); }
+        }
+
+        /* 2. SLIDESHOW Y NOMBRE */
         .contenedor-fotos {
             position: relative;
-            width: 80vw; /* 80% del ancho de la pantalla */
-            max-width: 300px; /* No crecerá más de esto en pantallas grandes */
-            aspect-ratio: 2 / 3; /* Mantiene la proporción de la foto */
+            width: 80vw;
+            max-width: 300px;
+            aspect-ratio: 2 / 3;
             margin-bottom: 25px;
         }
 
@@ -88,13 +107,14 @@
         }
         .pergamino-img.visible { opacity: 1; transform: translateY(0); }
 
-        /* 4. CALENDARIO GIGANTE */
+        /* 4. CALENDARIO GIGANTE OPTIMIZADO */
         .seccion-calendario {
             background-color: var(--rosa-fuerte);
             background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
             color: white;
             width: 100%;
             padding: 60px 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         .cal-header {
@@ -116,29 +136,36 @@
             font-weight: bold;
             margin-bottom: 15px;
             font-size: 0.7rem;
+            opacity: 0.9;
         }
 
         .dias-num {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 10px 0;
+            gap: 12px 0;
+            justify-items: center;
+            align-items: center;
         }
 
         .num {
             font-size: 1.1rem;
-            padding: 10px 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: relative;
             z-index: 1;
         }
 
-        /* CORAZÓN ANIMADO */
+        /* CENTRADO PERFECTO DEL CORAZÓN DIBUJADO */
         .corazon-dibujo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 45px;
-            height: 45px;
+            width: 48px;
+            height: 48px;
             fill: none;
             stroke: white;
             stroke-width: 2.5;
@@ -155,16 +182,38 @@
             100% { stroke-dashoffset: -200; opacity: 0; }
         }
 
-        /* 5. FRASE CRISTIANA */
-        .frase-quince {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(1.8rem, 7vw, 2.5rem);
-            color: var(--rosa-fuerte);
-            padding: 30px 15px;
-            max-width: 90%;
+        /* 5. SECCIÓN FRASE BÍBLICA CON FONDO */
+        .seccion-frase-biblica {
+            background-color: #fff6f8;
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            width: 100%;
+            padding: 50px 20px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+            border-top: 1px solid rgba(216, 27, 96, 0.05);
+            border-bottom: 1px solid rgba(216, 27, 96, 0.05);
         }
 
-        /* 6. CONTADOR PRO */
+        .frase-quince {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 7vw, 2.6rem);
+            color: var(--rosa-fuerte);
+            max-width: 90%;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+
+        .cita-biblica {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.3em; /* Separación de caracteres estilo alta costura (300 pt) */
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--texto);
+            display: block;
+            margin-top: 15px;
+        }
+
+        /* 6. CONTADOR BOXED */
         .contenedor-blanco-contador {
             background: rgba(255, 255, 255, 0.85);
             width: 90%;
@@ -208,6 +257,7 @@
             width: 100vw;
             scrollbar-width: none;
         }
+        .galeria-scroller::-webkit-scrollbar { display: none; }
         .galeria-scroller img {
             height: 250px;
             width: auto;
@@ -221,12 +271,14 @@
 </head>
 <body>
 
-    <section>
+    <!-- 1. FRASE INICIAL CON TEXTURA Y TRANSICIÓN -->
+    <div class="seccion-intro">
         <p class="frase-intro">
             Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida.
         </p>
-    </section>
+    </div>
 
+    <!-- 2. SLIDESHOW ADAPTABLE -->
     <section>
         <div class="contenedor-fotos">
             <img src="Galfoto1.png" class="slide active">
@@ -238,10 +290,12 @@
         <h1 class="nombre-quince">Elizabeth García</h1>
     </section>
 
+    <!-- 3. PERGAMINO REVEAL -->
     <section>
         <img src="pergamino.png" class="pergamino-img" id="pergamino">
     </section>
 
+    <!-- 4. CALENDARIO GIGANTE CON CORAZÓN CENTRADO -->
     <div class="seccion-calendario">
         <h2 class="cal-header">Guarda la fecha</h2>
         <div class="calendario">
@@ -262,13 +316,15 @@
         </div>
     </div>
 
-    <section>
+    <!-- 5. FRASE QUINCEAÑERA CRISTIANA CON FONDO PRO -->
+    <div class="seccion-frase-biblica">
         <p class="frase-quince">
-            "Pongo mi vida en manos del Señor, confío en Él y Él actuará." <br>
-            <small style="font-size: 1rem; font-family: 'Montserrat';">Salmos 37:5</small>
+            "Pongo mi vida en manos del Señor, confío en Él y Él actuará."
+            <span class="cita-biblica">Salmos 37:5</span>
         </p>
-    </section>
+    </div>
 
+    <!-- 6. CONTADOR BOXED -->
     <section>
         <div class="contenedor-blanco-contador">
             <div class="grid-contador">
@@ -280,6 +336,7 @@
         </div>
     </section>
 
+    <!-- 7. GALERIA -->
     <section>
         <h2 style="font-family: 'Cinzel Decorative'; margin-bottom: 5px; font-size: 1.2rem;">Galería de Recuerdos</h2>
         <div class="galeria-scroller">
