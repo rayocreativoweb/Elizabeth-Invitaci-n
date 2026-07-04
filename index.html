@@ -423,7 +423,6 @@
 
         .titulo-rsvp { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: white; margin-bottom: 10px; }
         
-        /* FORMULARIO RSVP DINAMICO */
         .tarjeta-formulario {
             background: white;
             padding: 30px 20px;
@@ -501,7 +500,6 @@
     
     <audio id="background-track" src="musica.mp3" loop autoplay></audio>
 
-    <!-- 1. FRASE INICIAL -->
     <div class="seccion-intro">
         <p class="frase-intro">
             Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida.
@@ -511,7 +509,6 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 2. SLIDESHOW -->
     <section>
         <div class="contenedor-fotos">
             <img src="Galfoto1.png" class="slide active">
@@ -525,7 +522,6 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 3. PERGAMINO -->
     <section>
         <div class="pergamino-wrapper" id="pergamino">
             <img src="pergamino.png" class="pergamino-img" onclick="this.classList.toggle('zoomed')">
@@ -534,7 +530,6 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 4. CALENDARIO ACTUALIZADO A AGOSTO 2026 -->
     <div class="seccion-calendario">
         <h2 class="cal-header">Guarda la fecha</h2>
         <div class="cal-mes-ano">Agosto 2026</div>
@@ -542,7 +537,6 @@
             <div class="dias-letras">
                 <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
             </div>
-            <!-- Agosto 2026 comienza en Sábado, por lo que se dejan 6 espacios vacíos primero -->
             <div class="dias-num">
                 <span></span><span></span><span></span><span></span><span></span><span></span>
                 <span class="num">1</span>
@@ -566,7 +560,6 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 5. FRASE BÍBLICA -->
     <div class="seccion-frase-biblica">
         <p class="frase-quince">
             "Pongo mi vida en manos del Señor, confío en Él y Él actuará."
@@ -576,7 +569,6 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 6. CONTADOR -->
     <section>
         <div class="contenedor-blanco-contador">
             <div class="grid-contador">
@@ -591,7 +583,6 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 7. GALERIA -->
     <section>
         <div class="indicador-scroll">Mis Recuerdos &nbsp;|&nbsp; Desliza <i class="fas fa-arrow-right"></i></div>
         <div class="galeria-scroller">
@@ -605,9 +596,8 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 8. DATOS DE CELEBRACIÓN -->
     <section>
-        <div class="icono-animado"><i class="fas fa-bible"></i></div>
+        <div class="icono-animado"><i class="fas fa-book-open"></i></div>
         <h2 class="titulo-gala">Ceremonia de Acción de Gracias</h2>
         <p class="datos-gala">
             <strong>Martes 4 de Agosto de 2026</strong><br>
@@ -627,12 +617,11 @@
             <strong>Poliforum Escárcega Camp.</strong><br>
             Hora: 6:00 PM
         </p>
-        <a href="#" class="btn-rosa-plata">Ver mapa</a>
+        <a href="https://maps.app.goo.gl/pVXjRvqpBvB1nYNo9?g_st=aw" target="_blank" class="btn-rosa-plata">Ver mapa</a>
     </section>
 
     <div class="separador-plata"></div>
 
-    <!-- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL CON WHATSAPP -->
     <div class="bloque-final-gala">
         <h2 class="titulo-rsvp">¡Acompáñame!</h2>
         <p style="font-size: 0.95rem; max-width: 320px; opacity: 0.9;">Tu presencia es muy importante, por favor confirma en el siguiente formulario</p>
@@ -655,7 +644,6 @@
         <span style="font-family: 'Montserrat'; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; font-size: 0.9rem;">¡Te esperamos!</span>
     </div>
 
-    <!-- 11. FOTO FINAL -->
     <div class="contenedor-foto-final">
         <img src="fotofinal.png">
         <div class="degradado-overlay"></div>
@@ -685,10 +673,9 @@
                 texto += `\n\nTe dejo este mensaje: ${mensaje}`;
             }
             
-            const numero = "5219823198958"; // El número sin el signo + ni espacios
+            const numero = "5219823198958";
             const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
             
-            // Abre WhatsApp en una nueva pestaña (o en la app)
             window.open(url, '_blank');
         }
 
@@ -749,7 +736,7 @@
             }
         });
 
-        // Reloj Regresivo (Actualizado al 4 de agosto de 2026, 15:30)
+        // Reloj Regresivo (Actualizado al 4 de agosto de 2026)
         const fecha = new Date('Aug 4, 2026 15:30:00').getTime();
         setInterval(() => {
             const ahora = new Date().getTime();
@@ -769,5 +756,3 @@
     </script>
 </body>
 </html>
-
-```
