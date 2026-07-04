@@ -741,7 +741,7 @@
             }
         }
 
-        // --- FUNCIÓN PARA ENVIAR WHATSAPP AUTOMÁTICO ---
+        // --- FUNCIÓN PARA ENVIAR WHATSAPP AUTOMÁTICO ACTUALIZADA ---
         function enviarWhatsApp() {
             const nombre = document.getElementById('wa-nombre').value.trim();
             const asistencia = document.getElementById('wa-asistencia').value;
@@ -755,10 +755,12 @@
             let texto = `¡Hola! Soy ${nombre}. `;
             
             if (asistencia === 'si') {
-                texto += `Con mucha alegría confirmo mi asistencia a tus XV años. 🎉 `;
-                // Si la persona tiene pases asignados en el link, lo añade al mensaje
+                texto += `Con mucha alegría confirmo mi asistencia a tus XV años. `;
+                // Ahora el mensaje incluye el total de personas basado en el pase asignado
                 if (numeroPases) {
-                    texto += `(${numeroPases === '1' ? '1 lugar' : numeroPases + ' lugares'}) `;
+                    texto += `Confirmamos nuestra asistencia para un total de ${numeroPases} persona(s). 🎉 `;
+                } else {
+                    texto += `🎉 `;
                 }
             } else {
                 texto += `Agradezco mucho la invitación, pero lamentablemente no podré asistir. 😔 `;
@@ -773,7 +775,7 @@
             
             window.open(url, '_blank');
         }
-
+        
         // --- Lógica de Audio ---
         const track = document.getElementById('background-track');
         const iconoNota = document.getElementById('icono-nota');
