@@ -1,3 +1,16 @@
+¡Me parecen unos ajustes excelentes! Estos toques finales harán que la invitación sea súper funcional y mucho más afín a las creencias y necesidades de la familia.
+
+Aquí tienes el detalle de lo que implementé en el código:
+
+1. **Actualización de Fecha:** Cambié los textos, el calendario y el contador regresivo al **Martes 4 de agosto de 2026**.
+2. **Calendario Cuadrado:** Ajusté los días del calendario para que correspondan exactamente a agosto de 2026 (que empieza en sábado) y moví el corazón animado para que encierre el número **4**.
+3. **Ícono sin Cruz:** Reemplacé el ícono de la iglesia con cruz por el de una **Biblia cerrada elegante** (`fa-bible`), mucho más representativo para una ceremonia cristiana de Acción de Gracias.
+4. **Ubicación Real:** Añadí el link de Google Maps que me proporcionaste directamente al botón "Ver mapa" del templo.
+5. **Formulario Funcional de WhatsApp:** Integré la lógica en JavaScript y mejoré el formulario. Ahora el invitado pone su nombre, selecciona si asiste o no, y puede escribir un mensaje opcional. Al darle clic, se abre automáticamente WhatsApp con un mensaje pre-escrito, súper formal y directo al número que me indicaste.
+
+Aquí tienes el código definitivo:
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -171,7 +184,7 @@
             line-height: 1.3;
         }
 
-        /* 3. PERGAMINO INTERACTIVO CON DOS ESTADOS */
+        /* 3. PERGAMINO INTERACTIVO */
         .pergamino-wrapper {
             width: 90%;
             max-width: 450px;
@@ -422,6 +435,8 @@
         }
 
         .titulo-rsvp { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: white; margin-bottom: 10px; }
+        
+        /* FORMULARIO RSVP DINAMICO */
         .tarjeta-formulario {
             background: white;
             padding: 30px 20px;
@@ -430,10 +445,13 @@
             max-width: 360px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             margin: 25px 0 50px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .control-form {
-            width: 100%; padding: 14px; margin-bottom: 15px;
+            width: 100%; padding: 14px;
             border: 1px solid #e0e0e0; border-radius: 10px;
             font-family: inherit; font-size: 0.9rem; text-align: center; outline: none;
             color: var(--texto);
@@ -445,7 +463,9 @@
             border: none; border-radius: 10px; font-weight: 600; font-size: 0.9rem;
             text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
             display: flex; justify-content: center; align-items: center; gap: 10px;
+            transition: transform 0.2s;
         }
+        .btn-whatsapp-rsvp:active { transform: scale(0.95); }
 
         .frase-despedida {
             font-family: 'Alex Brush', cursive;
@@ -492,7 +512,6 @@
         <i id="icono-nota" class="fas fa-music"></i>
     </div>
     
-    <!-- Agregada la propiedad 'autoplay' aquí para la intención directa de reproducción -->
     <audio id="background-track" src="musica.mp3" loop autoplay></audio>
 
     <!-- 1. FRASE INICIAL -->
@@ -528,24 +547,32 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 4. CALENDARIO CON CUADRÍCULA -->
+    <!-- 4. CALENDARIO ACTUALIZADO A AGOSTO 2026 -->
     <div class="seccion-calendario">
         <h2 class="cal-header">Guarda la fecha</h2>
-        <div class="cal-mes-ano">Mayo 2026</div>
+        <div class="cal-mes-ano">Agosto 2026</div>
         <div class="calendario">
             <div class="dias-letras">
                 <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
             </div>
+            <!-- Agosto 2026 comienza en Sábado, por lo que se dejan 6 espacios vacíos primero -->
             <div class="dias-num">
-                <span></span><span></span><span></span><span></span><span></span>
-                <span class="num">1</span><span class="num">2</span><span class="num">3</span><span class="num">4</span><span class="num">5</span><span class="num">6</span><span class="num">7</span><span class="num">8</span><span class="num">9</span><span class="num">10</span><span class="num">11</span><span class="num">12</span><span class="num">13</span><span class="num">14</span><span class="num">15</span><span class="num">16</span><span class="num">17</span><span class="num">18</span><span class="num">19</span><span class="num">20</span><span class="num">21</span><span class="num">22</span><span class="num">23</span><span class="num">24</span><span class="num">25</span><span class="num">26</span><span class="num">27</span><span class="num">28</span><span class="num">29</span>
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+                <span class="num">1</span>
+                
+                <span class="num">2</span><span class="num">3</span>
                 <span class="num">
-                    30
+                    4
                     <svg class="corazon-dibujo" viewBox="0 0 50 50">
                         <path d="M25 39.7l-.6-.5C11.5 28.7 8 25 8 19c0-5 4-9 9-9 4.1 0 6.4 2.3 8 4.1 1.6-1.8 3.9-4.1 8-4.1 5 0 9 4 9 9 0 6-3.5 9.7-16.4 20.2l-.6.5z"/>
                     </svg>
                 </span>
-                <span class="num">31</span>
+                <span class="num">5</span><span class="num">6</span><span class="num">7</span><span class="num">8</span>
+                
+                <span class="num">9</span><span class="num">10</span><span class="num">11</span><span class="num">12</span><span class="num">13</span><span class="num">14</span><span class="num">15</span>
+                <span class="num">16</span><span class="num">17</span><span class="num">18</span><span class="num">19</span><span class="num">20</span><span class="num">21</span><span class="num">22</span>
+                <span class="num">23</span><span class="num">24</span><span class="num">25</span><span class="num">26</span><span class="num">27</span><span class="num">28</span><span class="num">29</span>
+                <span class="num">30</span><span class="num">31</span>
             </div>
         </div>
     </div>
@@ -593,15 +620,15 @@
 
     <!-- 8. DATOS DE CELEBRACIÓN -->
     <section>
-        <div class="icono-animado"><i class="fas fa-church"></i></div>
+        <div class="icono-animado"><i class="fas fa-bible"></i></div>
         <h2 class="titulo-gala">Ceremonia de Acción de Gracias</h2>
         <p class="datos-gala">
-            <strong>Sábado 30 de Mayo de 2026</strong><br>
+            <strong>Martes 4 de Agosto de 2026</strong><br>
             3:30 PM<br>
             Templo Jordán (Escárcega, Camp.)<br>
             <span style="font-style: italic; opacity: 0.8;">Oficiará el Pastor Isidro Luna</span>
         </p>
-        <a href="#" class="btn-rosa-plata">Ver mapa</a>
+        <a href="https://maps.app.goo.gl/4jmEqKLLaqQYFuyb6?g_st=aw" target="_blank" class="btn-rosa-plata">Ver mapa</a>
     </section>
 
     <div class="separador-plata"></div>
@@ -618,19 +645,23 @@
 
     <div class="separador-plata"></div>
 
-    <!-- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL -->
+    <!-- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL CON WHATSAPP -->
     <div class="bloque-final-gala">
         <h2 class="titulo-rsvp">¡Acompáñame!</h2>
         <p style="font-size: 0.95rem; max-width: 320px; opacity: 0.9;">Tu presencia es muy importante, por favor confirma en el siguiente formulario</p>
         
         <div class="tarjeta-formulario">
-            <input type="text" class="control-form" placeholder="Nombre completo">
-            <select class="control-form">
-                <option value="">¿Asistirás?</option>
-                <option value="si">Sí, con gusto iré</option>
-                <option value="no">Lo siento, no podré</option>
+            <input type="text" id="wa-nombre" class="control-form" placeholder="Nombre completo" required>
+            
+            <select id="wa-asistencia" class="control-form" required>
+                <option value="">¿Asistirás a mis XV años?</option>
+                <option value="si">¡Sí, confirmo mi asistencia!</option>
+                <option value="no">Lo siento, no podré asistir</option>
             </select>
-            <button class="btn-whatsapp-rsvp"><i class="fab fa-whatsapp"></i> Confirmar Asistencia</button>
+            
+            <textarea id="wa-mensaje" class="control-form" rows="3" placeholder="Escribe un mensaje o felicitación (Opcional)" style="resize: none;"></textarea>
+            
+            <button class="btn-whatsapp-rsvp" onclick="enviarWhatsApp()"><i class="fab fa-whatsapp"></i> Enviar Confirmación</button>
         </div>
 
         <p class="frase-despedida">"Grandes cosas ha hecho el Señor con nosotros; y estamos alegres."</p>
@@ -644,7 +675,37 @@
     </div>
 
     <script>
-        // Lógica de Audio y Autoplay Inteligente Bypass
+        // FUNCIÓN PARA ENVIAR WHATSAPP AUTOMÁTICO
+        function enviarWhatsApp() {
+            const nombre = document.getElementById('wa-nombre').value.trim();
+            const asistencia = document.getElementById('wa-asistencia').value;
+            const mensaje = document.getElementById('wa-mensaje').value.trim();
+            
+            if (nombre === "" || asistencia === "") {
+                alert("Por favor, ingresa tu nombre y selecciona si asistirás.");
+                return;
+            }
+
+            let texto = `¡Hola! Soy ${nombre}. `;
+            
+            if (asistencia === 'si') {
+                texto += `Con mucha alegría confirmo mi asistencia a tus XV años. 🎉 `;
+            } else {
+                texto += `Agradezco mucho la invitación, pero lamentablemente no podré asistir. 😔 `;
+            }
+            
+            if (mensaje !== "") {
+                texto += `\n\nTe dejo este mensaje: ${mensaje}`;
+            }
+            
+            const numero = "5219823198958"; // El número sin el signo + ni espacios
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+            
+            // Abre WhatsApp en una nueva pestaña (o en la app)
+            window.open(url, '_blank');
+        }
+
+        // Lógica de Audio
         const track = document.getElementById('background-track');
         const iconoNota = document.getElementById('icono-nota');
         let sonando = false;
@@ -661,17 +722,15 @@
             }
         }
 
-        // Intento directo en cuanto cargue el documento
         window.addEventListener('DOMContentLoaded', () => {
             track.play().then(() => {
                 sonando = true;
                 iconoNota.className = "fas fa-volume-up";
             }).catch(() => {
-                console.log("El navegador bloqueó el autoplay inicial. Esperando movimiento.");
+                console.log("El navegador bloqueó el autoplay. Esperando interacción.");
             });
         });
 
-        // Alternativa silenciosa: Si falla el inicio, se dispara con el primer movimiento del invitado
         document.addEventListener('click', forzarMusicaInteraccion, { once: true });
         document.addEventListener('touchstart', forzarMusicaInteraccion, { once: true });
         document.addEventListener('scroll', forzarMusicaInteraccion, { once: true });
@@ -681,7 +740,7 @@
                 track.play().then(() => {
                     sonando = true;
                     iconoNota.className = "fas fa-volume-up";
-                }).catch(err => console.log("Interacción aún restringida por el sistema operativo móvil."));
+                }).catch(err => console.log("Interacción restringida."));
             }
         }
 
@@ -694,7 +753,7 @@
             slides[currentSlide].classList.add('active');
         }, 4000);
 
-        // Scroll Reveal
+        // Scroll Reveal interactivo
         const pergamino = document.getElementById('pergamino');
         window.addEventListener('scroll', () => {
             const pos = pergamino.getBoundingClientRect().top;
@@ -703,8 +762,8 @@
             }
         });
 
-        // Reloj Regresivo
-        const fecha = new Date('May 30, 2026 15:30:00').getTime();
+        // Reloj Regresivo (Actualizado al 4 de agosto de 2026, 15:30)
+        const fecha = new Date('Aug 4, 2026 15:30:00').getTime();
         setInterval(() => {
             const ahora = new Date().getTime();
             const d = fecha - ahora;
@@ -713,8 +772,15 @@
                 document.getElementById('h').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 document.getElementById('m').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
                 document.getElementById('s').innerText = Math.floor((d % (1000 * 60)) / 1000);
+            } else {
+                document.getElementById('d').innerText = "00";
+                document.getElementById('h').innerText = "00";
+                document.getElementById('m').innerText = "00";
+                document.getElementById('s').innerText = "00";
             }
         }, 1000);
     </script>
 </body>
 </html>
+
+```
