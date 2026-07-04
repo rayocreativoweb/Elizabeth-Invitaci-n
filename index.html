@@ -6,11 +6,14 @@
     
     <title>XV Elizabeth García Huchín</title>
 
+    <!-- META TAGS PARA WHATSAPP Y REDES SOCIALES -->
     <meta property="og:title" content="Mis XV Años | Elizabeth García Huchín">
     <meta property="og:description" content="Acompáñame a celebrar este hermoso capítulo de mi vida. Guarda la fecha: 4 de Agosto de 2026.">
     <meta property="og:image" content="https://rayocreativoweb.github.io/Elizabeth-Invitaci-n/miniatura.png">
     <meta property="og:url" content="https://rayocreativoweb.github.io/Elizabeth-Invitaci-n/">
     <meta property="og:type" content="website">
+    <!-- FIN META TAGS -->
+
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -415,7 +418,32 @@
             box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
         }
 
-        /* --- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL --- */
+        /* --- ESTILOS DEL CÓDIGO DE VESTIMENTA --- */
+        .bloque-vestimenta {
+            margin: 15px 0 25px 0;
+            padding: 15px 10px;
+            border-top: 1px solid rgba(216, 27, 96, 0.2);
+            border-bottom: 1px solid rgba(216, 27, 96, 0.2);
+            max-width: 320px;
+        }
+        .titulo-vestimenta {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--rosa-fuerte);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+        .texto-vestimenta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            color: var(--texto);
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* --- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL CON WHATSAPP --- */
         .bloque-final-gala {
             background-color: var(--rosa-fuerte);
             background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
@@ -508,6 +536,7 @@
     
     <audio id="background-track" src="musica.mp3" loop autoplay></audio>
 
+    <!-- 1. FRASE INICIAL -->
     <div class="seccion-intro">
         <p class="frase-intro">
             Con la gracia de Dios y el amor de mi familia, quiero invitarte a celebrar conmigo este hermoso capítulo de mi vida.
@@ -517,6 +546,7 @@
 
     <div class="separador-plata"></div>
 
+    <!-- 2. SLIDESHOW -->
     <section>
         <div class="contenedor-fotos">
             <img src="Galfoto1.png" class="slide active">
@@ -530,6 +560,7 @@
 
     <div class="separador-plata"></div>
 
+    <!-- 3. PERGAMINO -->
     <section>
         <div class="pergamino-wrapper" id="pergamino">
             <img src="pergamino.png" class="pergamino-img" onclick="this.classList.toggle('zoomed')">
@@ -538,6 +569,7 @@
 
     <div class="separador-plata"></div>
 
+    <!-- 4. CALENDARIO AGOSTO 2026 -->
     <div class="seccion-calendario">
         <h2 class="cal-header">Guarda la fecha</h2>
         <div class="cal-mes-ano">Agosto 2026</div>
@@ -568,6 +600,7 @@
 
     <div class="separador-plata"></div>
 
+    <!-- 5. FRASE BÍBLICA -->
     <div class="seccion-frase-biblica">
         <p class="frase-quince">
             "Pongo mi vida en manos del Señor, confío en Él y Él actuará."
@@ -577,6 +610,7 @@
 
     <div class="separador-plata"></div>
 
+    <!-- 6. CONTADOR -->
     <section>
         <div class="contenedor-blanco-contador">
             <div class="grid-contador">
@@ -591,6 +625,7 @@
 
     <div class="separador-plata"></div>
 
+    <!-- 7. GALERIA -->
     <section>
         <div class="indicador-scroll">Mis Recuerdos &nbsp;|&nbsp; Desliza <i class="fas fa-arrow-right"></i></div>
         <div class="galeria-scroller">
@@ -604,6 +639,7 @@
 
     <div class="separador-plata"></div>
 
+    <!-- 8. DATOS DE CELEBRACIÓN -->
     <section>
         <div class="icono-animado"><i class="fas fa-book-open"></i></div>
         <h2 class="titulo-gala">Ceremonia de Acción de Gracias</h2>
@@ -618,6 +654,7 @@
 
     <div class="separador-plata"></div>
 
+    <!-- RECEPCIÓN SOCIAL CON PASTEL Y CÓDIGO DE VESTIMENTA -->
     <section>
         <div class="icono-animado" style="animation-delay: 0.5s;"><i class="fas fa-cake-candles"></i></div>
         <h2 class="titulo-gala">Recepción Social</h2>
@@ -625,11 +662,19 @@
             <strong>Poliforum Escárcega Camp.</strong><br>
             Hora: 6:00 PM
         </p>
+
+        <!-- NUEVO BLOQUE DE VESTIMENTA -->
+        <div class="bloque-vestimenta">
+            <h3 class="titulo-vestimenta">Código de Vestimenta: Formal</h3>
+            <p class="texto-vestimenta">Agradeceremos evitar prendas en tonos blanco, beige y rosa, ya que estos colores estarán reservados para la temática del evento.</p>
+        </div>
+
         <a href="https://maps.app.goo.gl/pVXjRvqpBvB1nYNo9?g_st=aw" target="_blank" class="btn-rosa-plata">Ver mapa</a>
     </section>
 
     <div class="separador-plata"></div>
 
+    <!-- 9 y 10. BLOQUE UNIFICADO DE GALA FINAL CON WHATSAPP -->
     <div class="bloque-final-gala">
         <h2 class="titulo-rsvp">¡Acompáñame!</h2>
         <p style="font-size: 0.95rem; max-width: 320px; opacity: 0.9;">Tu presencia es muy importante, por favor confirma en el siguiente formulario</p>
@@ -652,6 +697,7 @@
         <span style="font-family: 'Montserrat'; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; font-size: 0.9rem;">¡Te esperamos!</span>
     </div>
 
+    <!-- 11. FOTO FINAL -->
     <div class="contenedor-foto-final">
         <img src="fotofinal.png">
         <div class="degradado-overlay"></div>
