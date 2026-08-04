@@ -15,28 +15,28 @@
         }
 
         body {
-            /* El fondo se queda fijo mientras haces scroll */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300; 
+            color: #2c2c2c; 
+            overflow-x: hidden;
+            background-color: #fdfbf7; /* Color base por si tardan en cargar las imágenes */
+        }
+
+        /* --- PRIMERA SECCIÓN: MENSAJE CON FondoText.png --- */
+        .seccion-mensaje {
             background-image: url('FondoText.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
             
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300; 
-            color: #2c2c2c; 
-            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
-            overflow-x: hidden;
-        }
-
-        /* --- PRIMERA SECCIÓN: MENSAJE --- */
-        .seccion-mensaje {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-end; 
             padding-bottom: 12vh; 
             text-align: center;
+            position: relative;
         }
 
         .contenedor-flotante {
@@ -44,6 +44,7 @@
             max-width: 600px;
             padding: 20px;
             animation: flotar 4s ease-in-out infinite;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
         }
 
         @keyframes flotar {
@@ -78,17 +79,38 @@
         .etiqueta-mesa { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 5px; }
         .numero-mesa { font-size: 3.5rem; font-weight: 400; color: #4a3b40; margin-top: 5px; }
 
-        /* --- SEGUNDA SECCIÓN: FOTOS Y CONTADOR --- */
+
+        /* --- SEGUNDA SECCIÓN: FOTOS Y CONTADOR CON FondoPro.png --- */
         .seccion-media {
+            background-image: url('FondoPro.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 40px 20px;
-            /* Un ligero fondo semitransparente para que destaquen las fotos y el contador del fondo principal */
-            background-color: rgba(255, 255, 255, 0.4); 
-            backdrop-filter: blur(3px);
+            position: relative;
+        }
+
+        /* Capa superpuesta muy suave para garantizar que el texto y las fotos resalten */
+        .seccion-media::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(2px);
+            z-index: 0;
+        }
+
+        /* Todo el contenido de la segunda sección va por encima de la capa transparente */
+        .seccion-media > * {
+            position: relative;
+            z-index: 1;
         }
 
         /* Carrusel de Fotos */
@@ -101,7 +123,7 @@
             overflow: hidden;
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
             margin-bottom: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.7);
+            border: 4px solid rgba(255, 255, 255, 0.8);
         }
 
         .slide {
@@ -119,13 +141,15 @@
             opacity: 1;
         }
 
-        /* Contador Regresivo */
+        /* Contador Regresivo - Fino, limpio y elegante */
         .titulo-contador {
-            font-family: 'Alex Brush', cursive;
-            font-size: 2.2rem;
-            color: #4a3b40;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            color: #2c2c2c;
             margin-bottom: 20px;
-            text-shadow: 0px 0px 5px rgba(255,255,255,0.8);
+            text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
         }
 
         .contador {
@@ -135,7 +159,7 @@
         }
 
         .bloque-tiempo {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             padding: 15px;
             border-radius: 10px;
             min-width: 70px;
@@ -145,9 +169,8 @@
 
         .numero-tiempo {
             font-size: 1.8rem;
-            font-weight: 600;
+            font-weight: 400;
             color: #4a3b40;
-            text-shadow: none;
         }
 
         .etiqueta-tiempo {
@@ -155,7 +178,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #666;
-            text-shadow: none;
             margin-top: 5px;
         }
 
@@ -164,7 +186,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(74, 59, 64, 0.2);
             border-radius: 50%;
             width: 50px;
@@ -187,11 +209,10 @@
 <body>
 
     <!-- Audio de Fondo -->
-    <!-- Reemplaza 'musica.mp3' por el nombre de tu archivo de audio -->
     <audio id="audio-fondo" src="musica.mp3" loop></audio>
     <button class="btn-musica" id="btn-musica">🎵</button>
 
-    <!-- SECCIÓN 1: MENSAJE (Ocupa la primera pantalla completa) -->
+    <!-- SECCIÓN 1: MENSAJE (FondoText.png) -->
     <div class="seccion-mensaje">
         <div class="contenedor-flotante">
             
@@ -231,18 +252,20 @@
         </div>
     </div>
 
-    <!-- SECCIÓN 2: FOTOS Y CONTADOR (Se ve al hacer scroll hacia abajo) -->
+    <!-- SECCIÓN 2: FOTOS Y CONTADOR (FondoPro.png) -->
     <div class="seccion-media">
         
-        <!-- Carrusel de Fotos (Reemplaza foto1.jpg, foto2.jpg, etc.) -->
+        <!-- Carrusel de 5 Fotos -->
         <div class="slideshow-container">
-            <img src="foto1.jpg" class="slide activa" alt="Elizabeth">
-            <img src="foto2.jpg" class="slide" alt="Elizabeth">
-            <img src="foto3.jpg" class="slide" alt="Elizabeth">
+            <img src="Galfoto1.png" class="slide activa" alt="Elizabeth">
+            <img src="Galfoto2.png" class="slide" alt="Elizabeth">
+            <img src="Galfoto3.png" class="slide" alt="Elizabeth">
+            <img src="Galfoto4.png" class="slide" alt="Elizabeth">
+            <img src="Galfoto5.png" class="slide" alt="Elizabeth">
         </div>
 
         <!-- Contador Regresivo -->
-        <div class="titulo-contador">Falta cada vez menos...</div>
+        <div class="titulo-contador">Cada vez falta menos...</div>
         <div class="contador">
             <div class="bloque-tiempo">
                 <div class="numero-tiempo" id="dias">00</div>
@@ -265,7 +288,7 @@
     </div>
 
     <script>
-        // 1. LECTURA DE DATOS EN EL ENLACE (Mesa y Personas)
+        // 1. LECTURA DE DATOS EN EL ENLACE
         const urlParams = new URLSearchParams(window.location.search);
         const tipo = urlParams.get('tipo') || 'familiar';
         const personas = urlParams.get('personas') || '1';
@@ -287,7 +310,6 @@
         const btnMusica = document.getElementById('btn-musica');
         let reproduciendo = false;
 
-        // Intentar reproducir automáticamente (Algunos navegadores lo permiten, otros requieren el clic)
         audio.play().then(() => { reproduciendo = true; }).catch(() => { reproduciendo = false; });
 
         btnMusica.addEventListener('click', () => {
@@ -302,7 +324,7 @@
             }
         });
 
-        // 3. CARRUSEL AUTOMÁTICO DE FOTOS
+        // 3. CARRUSEL AUTOMÁTICO DE FOTOS (5 Imágenes)
         let indiceFoto = 0;
         const fotos = document.querySelectorAll('.slide');
         
@@ -310,10 +332,10 @@
             fotos[indiceFoto].classList.remove('activa');
             indiceFoto = (indiceFoto + 1) % fotos.length;
             fotos[indiceFoto].classList.add('activa');
-        }, 3000); // Cambia de foto cada 3 segundos (3000 milisegundos)
+        }, 3000); 
 
-        // 4. CONTADOR REGRESIVO
-        const fechaEvento = new Date("December 17, 2026 00:00:00").getTime();
+        // 4. CONTADOR REGRESIVO 
+        const fechaEvento = new Date("December 17, 2026 15:30:00").getTime();
 
         const intervaloContador = setInterval(() => {
             const ahora = new Date().getTime();
@@ -329,7 +351,6 @@
             document.getElementById("minutos").textContent = minutos < 10 ? "0" + minutos : minutos;
             document.getElementById("segundos").textContent = segundos < 10 ? "0" + segundos : segundos;
 
-            // Si la fecha ya pasó
             if (distancia < 0) {
                 clearInterval(intervaloContador);
                 document.getElementById("dias").textContent = "00";
