@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agradecimiento - Elizabeth</title>
     
+    <!-- ========================================== -->
+    <!-- ETIQUETAS PARA LA MINIATURA DE WHATSAPP    -->
+    <!-- ========================================== -->
+    <meta property="og:title" content="¡Gracias por confirmar! - XV Años de Elizabeth">
+    <meta property="og:description" content="Nos emociona mucho compartir este gran día contigo. Aquí tienes tu pase de acceso y mesa asignada.">
+    <!-- Pon aquí el nombre de la imagen que quieres que salga en WhatsApp -->
+    <meta property="og:image" content="miniatura.png"> 
+    <meta property="og:type" content="website">
+    <!-- ========================================== -->
+
     <!-- Fuentes limpias, modernas y elegantes -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Alex+Brush&display=swap" rel="stylesheet">
     
@@ -28,16 +38,13 @@
             
             display: flex;
             justify-content: center;
-            /* Esto empuja el contenido hacia abajo */
             align-items: flex-end; 
-            /* Controla qué tan despegado del borde inferior queda (ajusta el 12vh si lo quieres más arriba o abajo) */
             padding-bottom: 12vh; 
             min-height: 100vh;
             text-align: center;
             
-            /* Color carbón oscuro para contrastar perfecto con el rosa pastel */
+            /* Color carbón oscuro */
             color: #2c2c2c; 
-            /* Sombra blanca sutil para separar el texto del fondo y darle limpieza */
             text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
         }
 
@@ -45,13 +52,12 @@
             width: 90%;
             max-width: 600px;
             padding: 20px;
-            /* Animación flotante suave */
             animation: flotar 4s ease-in-out infinite;
         }
 
         @keyframes flotar {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); } /* Sube 12 píxeles */
+            50% { transform: translateY(-12px); } 
             100% { transform: translateY(0px); }
         }
 
@@ -62,12 +68,11 @@
             letter-spacing: 0.5px;
         }
 
-        /* Estilo para las letras cursivas elegantes */
         .cursiva {
             font-family: 'Alex Brush', cursive;
             font-size: 2.4rem;
             line-height: 1;
-            color: #4a3b40; /* Un tono ligeramente cereza/carbón que combina con el rosa */
+            color: #4a3b40; 
             display: block;
             margin: 10px 0;
             text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
@@ -122,7 +127,7 @@
 </head>
 <body>
 
-    <!-- Audio de Fondo (Solo asegúrate de que el nombre musica.mp3 coincida con tu archivo) -->
+    <!-- Audio de Fondo -->
     <audio id="audio-fondo" src="musica.mp3" loop></audio>
     <button class="btn-musica" id="btn-musica">🎵</button>
 
