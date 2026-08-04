@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agradecimiento - Elizabeth</title>
-    <!-- Puedes enlazar aquí la misma fuente que usaste en tu style.css principal -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Fuentes limpias, modernas y elegantes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Alex+Brush&display=swap" rel="stylesheet">
     
     <style>
-        /* Reset básico */
         * {
             margin: 0;
             padding: 0;
@@ -16,66 +16,84 @@
         }
 
         body {
-            /* Aquí colocamos tu imagen de fondo */
             background-image: url('FondoText.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
             
-            font-family: 'Playfair Display', serif;
+            /* Tipografía general limpia y fina */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300; 
+            
             display: flex;
             justify-content: center;
-            align-items: center;
+            /* Esto empuja el contenido hacia abajo */
+            align-items: flex-end; 
+            /* Controla qué tan despegado del borde inferior queda (ajusta el 12vh si lo quieres más arriba o abajo) */
+            padding-bottom: 12vh; 
             min-height: 100vh;
             text-align: center;
             
-            /* Color del texto: blanco con una sombra sutil para que se lea perfecto sobre cualquier fondo */
-            color: #ffffff; 
-            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6);
+            /* Color carbón oscuro para contrastar perfecto con el rosa pastel */
+            color: #2c2c2c; 
+            /* Sombra blanca sutil para separar el texto del fondo y darle limpieza */
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
         }
 
-        /* Contenedor que tendrá el efecto flotante */
         .contenedor-flotante {
             width: 90%;
             max-width: 600px;
-            padding: 30px;
-            
-            /* Animación flotante de 4 segundos, infinita y suave */
+            padding: 20px;
+            /* Animación flotante suave */
             animation: flotar 4s ease-in-out infinite;
         }
 
-        /* Instrucciones del movimiento flotante */
         @keyframes flotar {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); } /* Sube 15 píxeles */
-            100% { transform: translateY(0px); } /* Regresa a su posición */
+            50% { transform: translateY(-12px); } /* Sube 12 píxeles */
+            100% { transform: translateY(0px); }
         }
 
         .mensaje-texto {
-            font-size: 1.3rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Estilo para las letras cursivas elegantes */
+        .cursiva {
+            font-family: 'Alex Brush', cursive;
+            font-size: 2.4rem;
+            line-height: 1;
+            color: #4a3b40; /* Un tono ligeramente cereza/carbón que combina con el rosa */
+            display: block;
+            margin: 10px 0;
+            text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
         }
 
         .destacado {
-            color: #d4af37; /* Tono dorado elegante */
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-weight: 400;
+            font-size: 1.15rem;
         }
 
         .bloque-mesa {
-            margin-top: 40px;
+            margin-top: 35px;
+        }
+
+        .etiqueta-mesa {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
         }
 
         .numero-mesa {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #d4af37;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: #4a3b40;
             margin-top: 5px;
-            /* Le damos un pequeño efecto de brillo/sombra al número */
-            text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.4);
         }
     </style>
 </head>
@@ -90,11 +108,14 @@
                 <span class="destacado"><span id="val-personas"></span> personas</span>.
             </p>
             <p class="mensaje-texto">
-                Será un honor contar con su presencia para celebrar con Acción de Gracias los XV Años de nuestra amada hija Elizabeth.
+                Será un honor contar con su presencia para celebrar con 
+                <span class="cursiva">Acción de Gracias</span>
+                los XV Años de nuestra amada hija 
+                <span class="cursiva">Elizabeth</span>
             </p>
             
             <div class="bloque-mesa">
-                <p class="mensaje-texto" style="margin-bottom: 0;">Mesa Asignada:</p>
+                <p class="etiqueta-mesa">Mesa Asignada</p>
                 <div class="numero-mesa" id="val-mesa"></div>
             </div>
         </div>
@@ -106,12 +127,13 @@
                 Gracias por confirmar tu asistencia.
             </p>
             <p class="mensaje-texto">
-                Será un gusto compartir este momento tan especial y celebrar juntos, Mis XV años.
+                Será un gusto compartir este momento tan especial y celebrar juntos,
+                <span class="cursiva">Mis XV años</span>
             </p>
             
             <div class="bloque-mesa">
-                <p class="destacado">🎫 Pase Individual</p>
-                <p class="mensaje-texto" style="margin-top: 15px; margin-bottom: 0;">✨ Mesa VIP ✨</p>
+                <p class="etiqueta-mesa" style="font-weight: 400;">🎫 Pase Individual</p>
+                <p class="etiqueta-mesa" style="margin-top: 15px;">✨ Mesa VIP ✨</p>
                 <div class="numero-mesa" id="val-mesa-joven"></div>
             </div>
         </div>
@@ -119,13 +141,11 @@
     </div>
 
     <script>
-        // Lectura de los parámetros en el enlace
         const urlParams = new URLSearchParams(window.location.search);
         const tipo = urlParams.get('tipo') || 'familiar';
         const personas = urlParams.get('personas') || '1';
         const mesa = urlParams.get('mesa') || '1';
 
-        // Mostrar un bloque u otro
         if (tipo === 'joven') {
             document.getElementById('msg-familiar').style.display = 'none';
             document.getElementById('msg-joven').style.display = 'block';
