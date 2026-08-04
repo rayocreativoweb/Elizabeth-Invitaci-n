@@ -1,160 +1,131 @@
-!DOCTYPE html
-html lang=es
-head
-    meta charset=UTF-8
-    meta name=viewport content=width=device-width, initial-scale=1.0
-    titleAgradecimiento de Asistencia - XV Años Elizabethtitle
-    link href=httpsfonts.googleapis.comcss2family=Playfair+Displayital,wght@0,400;0,600;1,400&family=Montserratwght@300;400;500&display=swap rel=stylesheet
-    style
-        root {
-            --bg-color #fdfbf7;
-            --card-bg #ffffff;
-            --text-color #2c2c2c;
-            --accent-color #c5a059;  Dorado elegante 
-            --accent-light #f4ecdf;
-        }
-
-         {
-            box-sizing border-box;
-            margin 0;
-            padding 0;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agradecimiento - Elizabeth</title>
+    <!-- Puedes enlazar aquí la misma fuente que usaste en tu style.css principal -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family 'Montserrat', sans-serif;
-            background-color var(--bg-color);
-            color var(--text-color);
-            display flex;
-            justify-content center;
-            align-items center;
-            min-height 100vh;
-            padding 20px;
-        }
-
-        .card {
-            background-color var(--card-bg);
-            max-width 480px;
-            width 100%;
-            padding 40px 30px;
-            border-radius 16px;
-            box-shadow 0 10px 30px rgba(0, 0, 0, 0.05);
-            text-align center;
-            border 1px solid rgba(197, 160, 89, 0.2);
-        }
-
-        .subtitle {
-            font-size 0.85rem;
-            text-transform uppercase;
-            letter-spacing 3px;
-            color var(--accent-color);
-            margin-bottom 10px;
-        }
-
-        h1 {
-            font-family 'Playfair Display', serif;
-            font-size 1.8rem;
-            margin-bottom 25px;
-            color #1a1a1a;
-        }
-
-        .divider {
-            width 50px;
-            height 2px;
-            background-color var(--accent-color);
-            margin 0 auto 25px auto;
-        }
-
-        p {
-            font-size 1rem;
-            line-height 1.6;
-            color #555;
-            margin-bottom 20px;
-        }
-
-        .highlight-box {
-            background-color var(--accent-light);
-            border-radius 12px;
-            padding 20px;
-            margin-top 25px;
-            border 1px dashed var(--accent-color);
-        }
-
-        .highlight-box p {
-            margin-bottom 5px;
-            color #333;
-            font-weight 500;
-        }
-
-        .number {
-            font-family 'Playfair Display', serif;
-            font-size 1.5rem;
-            color var(--accent-color);
-            font-weight bold;
-        }
-
-        .badge {
-            display inline-block;
-            background #2c2c2c;
-            color #fff;
-            padding 6px 16px;
-            border-radius 20px;
-            font-size 0.9rem;
-            margin-bottom 15px;
-            letter-spacing 1px;
-        }
-
-        .footer-note {
-            margin-top 30px;
-            font-size 0.8rem;
-            color #888;
-            font-style italic;
-        }
-    style
-head
-body
-
-    div class=card
-        div class=subtitleXV Añosdiv
-        h1Elizabethh1
-        div class=dividerdiv
-
-        !-- CONTENIDO FORMATO FAMILIAR  GENERAL --
-        div id=msg-familiar style=display none;
-            pCon profunda gratitud a Dios, agradecemos su amable confirmación para strongspan id=val-personasspan personasstrong.p
-            pSerá un honor contar con su presencia para celebrar con Acción de Gracias los XV Años de nuestra amada hija Elizabeth.p
+            /* Aquí colocamos tu imagen de fondo */
+            background-image: url('FondoText.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
             
-            div class=highlight-box
-                pMesa Asignadap
-                div class=number id=val-mesa--div
-            div
-        div
-
-        !-- CONTENIDO FORMATO JÓVENES  VIP --
-        div id=msg-joven style=display none;
-            p¡Qué alegría contar contigo! 🤍p
-            pGracias por confirmar tu asistencia. Será un gusto compartir este momento tan especial y celebrar juntos, Mis XV años.p
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
             
-            div style=margin-top 20px;
-                div class=badge🎫 Pase Individualdiv
-            div
+            /* Color del texto: blanco con una sombra sutil para que se lea perfecto sobre cualquier fondo */
+            color: #ffffff; 
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6);
+        }
 
-            div class=highlight-box
-                p✨ Mesa VIP ✨p
-                div class=number id=val-mesa-joven--div
-            div
-        div
+        /* Contenedor que tendrá el efecto flotante */
+        .contenedor-flotante {
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            
+            /* Animación flotante de 4 segundos, infinita y suave */
+            animation: flotar 4s ease-in-out infinite;
+        }
 
-        div class=footer-note¡Te esperamos con mucho cariño!div
-    div
+        /* Instrucciones del movimiento flotante */
+        @keyframes flotar {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); } /* Sube 15 píxeles */
+            100% { transform: translateY(0px); } /* Regresa a su posición */
+        }
 
-    script
-         Lee automáticamente los datos que vengan en el enlace web
+        .mensaje-texto {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .destacado {
+            color: #d4af37; /* Tono dorado elegante */
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .bloque-mesa {
+            margin-top: 40px;
+        }
+
+        .numero-mesa {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #d4af37;
+            margin-top: 5px;
+            /* Le damos un pequeño efecto de brillo/sombra al número */
+            text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-flotante">
+        
+        <!-- VERSIÓN FAMILIAR -->
+        <div id="msg-familiar" style="display: none;">
+            <p class="mensaje-texto">
+                Con profunda gratitud a Dios, agradecemos su amable confirmación para <br>
+                <span class="destacado"><span id="val-personas"></span> personas</span>.
+            </p>
+            <p class="mensaje-texto">
+                Será un honor contar con su presencia para celebrar con Acción de Gracias los XV Años de nuestra amada hija Elizabeth.
+            </p>
+            
+            <div class="bloque-mesa">
+                <p class="mensaje-texto" style="margin-bottom: 0;">Mesa Asignada:</p>
+                <div class="numero-mesa" id="val-mesa"></div>
+            </div>
+        </div>
+
+        <!-- VERSIÓN JÓVENES -->
+        <div id="msg-joven" style="display: none;">
+            <p class="mensaje-texto">
+                ¡Qué alegría contar contigo! 🤍<br><br>
+                Gracias por confirmar tu asistencia.
+            </p>
+            <p class="mensaje-texto">
+                Será un gusto compartir este momento tan especial y celebrar juntos, Mis XV años.
+            </p>
+            
+            <div class="bloque-mesa">
+                <p class="destacado">🎫 Pase Individual</p>
+                <p class="mensaje-texto" style="margin-top: 15px; margin-bottom: 0;">✨ Mesa VIP ✨</p>
+                <div class="numero-mesa" id="val-mesa-joven"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Lectura de los parámetros en el enlace
         const urlParams = new URLSearchParams(window.location.search);
-        const tipo = urlParams.get('tipo')  'familiar';
-        const personas = urlParams.get('personas')  '1';
-        const mesa = urlParams.get('mesa')  '1';
+        const tipo = urlParams.get('tipo') || 'familiar';
+        const personas = urlParams.get('personas') || '1';
+        const mesa = urlParams.get('mesa') || '1';
 
-         Cambia la pantalla según el tipo de invitado
+        // Mostrar un bloque u otro
         if (tipo === 'joven') {
             document.getElementById('msg-familiar').style.display = 'none';
             document.getElementById('msg-joven').style.display = 'block';
@@ -165,6 +136,6 @@ body
             document.getElementById('val-personas').textContent = personas;
             document.getElementById('val-mesa').textContent = mesa;
         }
-    script
-body
-html
+    </script>
+</body>
+</html>
