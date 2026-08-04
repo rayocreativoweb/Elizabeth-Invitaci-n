@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agradecimiento - Elizabeth</title>
     
-    <!-- Fuentes limpias, modernas y elegantes -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Alex+Brush&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Alex+Brush&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -16,42 +15,40 @@
         }
 
         body {
+            /* El fondo se queda fijo mientras haces scroll */
             background-image: url('FondoText.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
             
-            /* Tipografía general limpia y fina */
             font-family: 'Montserrat', sans-serif;
             font-weight: 300; 
-            
+            color: #2c2c2c; 
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+            overflow-x: hidden;
+        }
+
+        /* --- PRIMERA SECCIÓN: MENSAJE --- */
+        .seccion-mensaje {
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            /* Esto empuja el contenido hacia abajo */
             align-items: flex-end; 
-            /* Controla qué tan despegado del borde inferior queda (ajusta el 12vh si lo quieres más arriba o abajo) */
             padding-bottom: 12vh; 
-            min-height: 100vh;
             text-align: center;
-            
-            /* Color carbón oscuro para contrastar perfecto con el rosa pastel */
-            color: #2c2c2c; 
-            /* Sombra blanca sutil para separar el texto del fondo y darle limpieza */
-            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
         }
 
         .contenedor-flotante {
             width: 90%;
             max-width: 600px;
             padding: 20px;
-            /* Animación flotante suave */
             animation: flotar 4s ease-in-out infinite;
         }
 
         @keyframes flotar {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); } /* Sube 12 píxeles */
+            50% { transform: translateY(-12px); } 
             100% { transform: translateY(0px); }
         }
 
@@ -62,12 +59,11 @@
             letter-spacing: 0.5px;
         }
 
-        /* Estilo para las letras cursivas elegantes */
         .cursiva {
             font-family: 'Alex Brush', cursive;
             font-size: 2.4rem;
             line-height: 1;
-            color: #4a3b40; /* Un tono ligeramente cereza/carbón que combina con el rosa */
+            color: #4a3b40; 
             display: block;
             margin: 10px 0;
             text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
@@ -78,69 +74,198 @@
             font-size: 1.15rem;
         }
 
-        .bloque-mesa {
-            margin-top: 35px;
+        .bloque-mesa { margin-top: 35px; }
+        .etiqueta-mesa { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 5px; }
+        .numero-mesa { font-size: 3.5rem; font-weight: 400; color: #4a3b40; margin-top: 5px; }
+
+        /* --- SEGUNDA SECCIÓN: FOTOS Y CONTADOR --- */
+        .seccion-media {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            /* Un ligero fondo semitransparente para que destaquen las fotos y el contador del fondo principal */
+            background-color: rgba(255, 255, 255, 0.4); 
+            backdrop-filter: blur(3px);
         }
 
-        .etiqueta-mesa {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 5px;
+        /* Carrusel de Fotos */
+        .slideshow-container {
+            width: 100%;
+            max-width: 350px;
+            height: 450px;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.7);
         }
 
-        .numero-mesa {
-            font-size: 3.5rem;
-            font-weight: 400;
+        .slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.activa {
+            opacity: 1;
+        }
+
+        /* Contador Regresivo */
+        .titulo-contador {
+            font-family: 'Alex Brush', cursive;
+            font-size: 2.2rem;
             color: #4a3b40;
+            margin-bottom: 20px;
+            text-shadow: 0px 0px 5px rgba(255,255,255,0.8);
+        }
+
+        .contador {
+            display: flex;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .bloque-tiempo {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 70px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(74, 59, 64, 0.1);
+        }
+
+        .numero-tiempo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4a3b40;
+            text-shadow: none;
+        }
+
+        .etiqueta-tiempo {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            text-shadow: none;
             margin-top: 5px;
         }
+
+        /* --- BOTÓN DE MÚSICA FLOTANTE --- */
+        .btn-musica {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(74, 59, 64, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+        .btn-musica:hover {
+            transform: scale(1.1);
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="contenedor-flotante">
-        
-        <!-- VERSIÓN FAMILIAR -->
-        <div id="msg-familiar" style="display: none;">
-            <p class="mensaje-texto">
-                Con profunda gratitud a Dios, agradecemos su amable confirmación para <br>
-                <span class="destacado"><span id="val-personas"></span> personas</span>.
-            </p>
-            <p class="mensaje-texto">
-                Será un honor contar con su presencia para celebrar con 
-                <span class="cursiva">Acción de Gracias</span>
-                los XV Años de nuestra amada hija 
-                <span class="cursiva">Elizabeth</span>
-            </p>
+    <!-- Audio de Fondo -->
+    <!-- Reemplaza 'musica.mp3' por el nombre de tu archivo de audio -->
+    <audio id="audio-fondo" src="musica.mp3" loop></audio>
+    <button class="btn-musica" id="btn-musica">🎵</button>
+
+    <!-- SECCIÓN 1: MENSAJE (Ocupa la primera pantalla completa) -->
+    <div class="seccion-mensaje">
+        <div class="contenedor-flotante">
             
-            <div class="bloque-mesa">
-                <p class="etiqueta-mesa">Mesa Asignada</p>
-                <div class="numero-mesa" id="val-mesa"></div>
+            <div id="msg-familiar" style="display: none;">
+                <p class="mensaje-texto">
+                    Con profunda gratitud a Dios, agradecemos su amable confirmación para <br>
+                    <span class="destacado"><span id="val-personas"></span> personas</span>.
+                </p>
+                <p class="mensaje-texto">
+                    Será un honor contar con su presencia para celebrar con 
+                    <span class="cursiva">Acción de Gracias</span>
+                    los XV Años de nuestra amada hija 
+                    <span class="cursiva">Elizabeth</span>
+                </p>
+                <div class="bloque-mesa">
+                    <p class="etiqueta-mesa">Mesa Asignada</p>
+                    <div class="numero-mesa" id="val-mesa"></div>
+                </div>
             </div>
+
+            <div id="msg-joven" style="display: none;">
+                <p class="mensaje-texto">
+                    ¡Qué alegría contar contigo! 🤍<br><br>
+                    Gracias por confirmar tu asistencia.
+                </p>
+                <p class="mensaje-texto">
+                    Será un gusto compartir este momento tan especial y celebrar juntos,
+                    <span class="cursiva">Mis XV años</span>
+                </p>
+                <div class="bloque-mesa">
+                    <p class="etiqueta-mesa" style="font-weight: 400;">🎫 Pase Individual</p>
+                    <p class="etiqueta-mesa" style="margin-top: 15px;">✨ Mesa VIP ✨</p>
+                    <div class="numero-mesa" id="val-mesa-joven"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SECCIÓN 2: FOTOS Y CONTADOR (Se ve al hacer scroll hacia abajo) -->
+    <div class="seccion-media">
+        
+        <!-- Carrusel de Fotos (Reemplaza foto1.jpg, foto2.jpg, etc.) -->
+        <div class="slideshow-container">
+            <img src="foto1.jpg" class="slide activa" alt="Elizabeth">
+            <img src="foto2.jpg" class="slide" alt="Elizabeth">
+            <img src="foto3.jpg" class="slide" alt="Elizabeth">
         </div>
 
-        <!-- VERSIÓN JÓVENES -->
-        <div id="msg-joven" style="display: none;">
-            <p class="mensaje-texto">
-                ¡Qué alegría contar contigo! 🤍<br><br>
-                Gracias por confirmar tu asistencia.
-            </p>
-            <p class="mensaje-texto">
-                Será un gusto compartir este momento tan especial y celebrar juntos,
-                <span class="cursiva">Mis XV años</span>
-            </p>
-            
-            <div class="bloque-mesa">
-                <p class="etiqueta-mesa" style="font-weight: 400;">🎫 Pase Individual</p>
-                <p class="etiqueta-mesa" style="margin-top: 15px;">✨ Mesa VIP ✨</p>
-                <div class="numero-mesa" id="val-mesa-joven"></div>
+        <!-- Contador Regresivo -->
+        <div class="titulo-contador">Falta cada vez menos...</div>
+        <div class="contador">
+            <div class="bloque-tiempo">
+                <div class="numero-tiempo" id="dias">00</div>
+                <div class="etiqueta-tiempo">Días</div>
+            </div>
+            <div class="bloque-tiempo">
+                <div class="numero-tiempo" id="horas">00</div>
+                <div class="etiqueta-tiempo">Hrs</div>
+            </div>
+            <div class="bloque-tiempo">
+                <div class="numero-tiempo" id="minutos">00</div>
+                <div class="etiqueta-tiempo">Min</div>
+            </div>
+            <div class="bloque-tiempo">
+                <div class="numero-tiempo" id="segundos">00</div>
+                <div class="etiqueta-tiempo">Seg</div>
             </div>
         </div>
 
     </div>
 
     <script>
+        // 1. LECTURA DE DATOS EN EL ENLACE (Mesa y Personas)
         const urlParams = new URLSearchParams(window.location.search);
         const tipo = urlParams.get('tipo') || 'familiar';
         const personas = urlParams.get('personas') || '1';
@@ -156,6 +281,63 @@
             document.getElementById('val-personas').textContent = personas;
             document.getElementById('val-mesa').textContent = mesa;
         }
+
+        // 2. CONTROL DE MÚSICA DE FONDO
+        const audio = document.getElementById('audio-fondo');
+        const btnMusica = document.getElementById('btn-musica');
+        let reproduciendo = false;
+
+        // Intentar reproducir automáticamente (Algunos navegadores lo permiten, otros requieren el clic)
+        audio.play().then(() => { reproduciendo = true; }).catch(() => { reproduciendo = false; });
+
+        btnMusica.addEventListener('click', () => {
+            if (reproduciendo) {
+                audio.pause();
+                btnMusica.textContent = '🔈';
+                reproduciendo = false;
+            } else {
+                audio.play();
+                btnMusica.textContent = '🎵';
+                reproduciendo = true;
+            }
+        });
+
+        // 3. CARRUSEL AUTOMÁTICO DE FOTOS
+        let indiceFoto = 0;
+        const fotos = document.querySelectorAll('.slide');
+        
+        setInterval(() => {
+            fotos[indiceFoto].classList.remove('activa');
+            indiceFoto = (indiceFoto + 1) % fotos.length;
+            fotos[indiceFoto].classList.add('activa');
+        }, 3000); // Cambia de foto cada 3 segundos (3000 milisegundos)
+
+        // 4. CONTADOR REGRESIVO
+        const fechaEvento = new Date("December 17, 2026 00:00:00").getTime();
+
+        const intervaloContador = setInterval(() => {
+            const ahora = new Date().getTime();
+            const distancia = fechaEvento - ahora;
+
+            const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+            document.getElementById("dias").textContent = dias < 10 ? "0" + dias : dias;
+            document.getElementById("horas").textContent = horas < 10 ? "0" + horas : horas;
+            document.getElementById("minutos").textContent = minutos < 10 ? "0" + minutos : minutos;
+            document.getElementById("segundos").textContent = segundos < 10 ? "0" + segundos : segundos;
+
+            // Si la fecha ya pasó
+            if (distancia < 0) {
+                clearInterval(intervaloContador);
+                document.getElementById("dias").textContent = "00";
+                document.getElementById("horas").textContent = "00";
+                document.getElementById("minutos").textContent = "00";
+                document.getElementById("segundos").textContent = "00";
+            }
+        }, 1000);
     </script>
 </body>
 </html>
